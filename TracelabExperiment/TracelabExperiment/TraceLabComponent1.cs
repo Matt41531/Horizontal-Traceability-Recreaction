@@ -1,32 +1,43 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
 // Located in c:\Program Files (x86)\COEST\TraceLab\lib\TraceLabSDK.dll
 using TraceLabSDK;
+using TraceLabSDK.Types;
 
 namespace TracelabExperiment
 {
     [Component(Name = "FeatureRequestsTest",
                 Description = "",
                 Author = "Matthew Rife & Jen Lee",
-                Version = "2.0")]
-    //[IOSpec(IOType = IOSpecType.Output, Name = "outputName", DataType = typeof(int))]
+                Version = "2.0",
+                ConfigurationType = typeof(TraceLabComponent1Configuration)
+        )]
+    [IOSpec(IOType = IOSpecType.Output, Name = "outputName", DataType = typeof(TLArtifactsCollection))]
     public class TraceLabComponent1 : BaseComponent
     {
-        public TraceLabComponent1(ComponentLogger log) : base(log) { }
+        public TraceLabComponent1(ComponentLogger log) : base(log)
+        {
+            this.Configuration = new TraceLabComponent1Configuration();
+        }
 
+        public new TraceLabComponent1Configuration Configuration
+        {
+            get => base.Configuration as TraceLabComponent1Configuration;
+            set => base.Configuration = value;
+        }
         public override void Compute()
         {
             // your component implementation
-            /*
-             This generates input file, just need to find the dependencies to run it first
+    
             var inputFile = this.Configuration.Artifacts.Absolute;
-            if (!this.fileSystem.File.Exists(inputFile))
-            {
-                throw new ComponentException("File path does not exist.");
-            }
-            */
+            
             string strCmdText;
             strCmdText = "/C ipconfig/all";
             System.Diagnostics.Process.Start("CMD.exe", strCmdText);
+            Logger.Trace(inputFile);
             Logger.Trace("Worked");
             
             //Workspace.Store("outputName", 5);

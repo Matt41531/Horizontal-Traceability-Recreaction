@@ -5,9 +5,9 @@ using System.Text;
 using System.ComponentModel;
 using TraceLabSDK.Component.Config;
 
-namespace TracelabExperiment
+namespace RecreationExperiment
 {
-    public class TraceLabComponent1Configuration
+    public class SetupComponentConfiguration
     {
         [DisplayName("Artifacts location")]
         [Description("Location of artifacts file")]

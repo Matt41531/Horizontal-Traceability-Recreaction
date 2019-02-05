@@ -7,25 +7,25 @@ using System.Linq;
 using TraceLabSDK;
 using TraceLabSDK.Types;
 
-namespace TracelabExperiment
+namespace RecreationExperiment
 {
     [Component(Name = "FeatureRequestsTest",
                 Description = "",
                 Author = "Matthew Rife & Jen Lee",
                 Version = "2.0",
-                ConfigurationType = typeof(TraceLabComponent1Configuration)
+                ConfigurationType = typeof(SetupComponentConfiguration)
         )]
     [IOSpec(IOType = IOSpecType.Output, Name = "outputName", DataType = typeof(TLArtifactsCollection))]
-    public class TraceLabComponent1 : BaseComponent
+    public class SetupComponent : BaseComponent
     {
-        public TraceLabComponent1(ComponentLogger log) : base(log)
+        public SetupComponent(ComponentLogger log) : base(log)
         {
-            this.Configuration = new TraceLabComponent1Configuration();
+            this.Configuration = new SetupComponentConfiguration();
         }
 
-        public new TraceLabComponent1Configuration Configuration
+        public new SetupComponentConfiguration Configuration
         {
-            get => base.Configuration as TraceLabComponent1Configuration;
+            get => base.Configuration as SetupComponentConfiguration;
             set => base.Configuration = value;
         }
         public override void Compute()

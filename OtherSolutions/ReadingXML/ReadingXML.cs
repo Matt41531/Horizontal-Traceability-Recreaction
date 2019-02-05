@@ -62,9 +62,9 @@ namespace ReadingXML
             }
 
 
-            // Loading from a file, you can also load from a stream
-            // Note: Needs to be edited to open local file
-            var xml = XDocument.Load(@"C:\Users\Jen Lee\Desktop\TraceLab-Experiment\TracelabExperiment\Databases\" + filename);
+        // Loading from a file, you can also load from a stream
+        // Note: Needs to be edited to open local file
+             var xml = XDocument.Load(@"..\..\..\..\Databases\" + filename);
 
             // Parse every bug in the file to find total
             var requests = from r in xml.Root.Descendants(root)

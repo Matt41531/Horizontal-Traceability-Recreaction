@@ -5,7 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using TraceLabSDK.Component.Config;
 
-namespace RecreationComponents
+namespace ComponentSolutions
 {
     public class SetupComponentConfiguration
     {

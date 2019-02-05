@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TracelabExperiment", "TracelabExperiment\TracelabExperiment.csproj", "{0F0D7447-5BDD-4177-A365-F102114D668F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorizontalRecreation", "TracelabExperiment\HorizontalRecreation.csproj", "{0F0D7447-5BDD-4177-A365-F102114D668F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

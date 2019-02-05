@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0F0D7447-5BDD-4177-A365-F102114D668F}</ProjectGuid>
+    <ProjectGuid>{A5D102F6-4A37-4CC2-83EB-125DA3884A33}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TracelabExperiment</RootNamespace>
-    <AssemblyName>TracelabExperiment</AssemblyName>
+    <RootNamespace>HorizontalRecreation</RootNamespace>
+    <AssemblyName>HorizontalRecreation</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -47,7 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TraceLabComponent1.cs" />
+    <Compile Include="SetupComponent.cs" />
+    <Compile Include="SetupComponentConfiguration.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

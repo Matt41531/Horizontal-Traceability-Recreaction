@@ -7,9 +7,9 @@ using System.Linq;
 using TraceLabSDK;
 using TraceLabSDK.Types;
 
-namespace RecreationComponents
+namespace ComponentSolutions
 {
-    [Component(Name = "FeatureRequestsTest",
+    [Component(Name = "Setup",
                 Description = "",
                 Author = "Matthew Rife & Jen Lee",
                 Version = "2.0",

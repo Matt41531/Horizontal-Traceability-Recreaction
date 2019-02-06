@@ -12,7 +12,7 @@ namespace TracelabExperiment
     [Component(Name = "FeatureRequestsTest",
                 Description = "",
                 Author = "Matthew Rife & Jen Lee",
-                Version = "2.0",
+                Version = "2.1",
                 ConfigurationType = typeof(TraceLabComponent1Configuration)
         )]
     [IOSpec(IOType = IOSpecType.Output, Name = "outputName", DataType = typeof(TLArtifactsCollection))]
@@ -31,12 +31,22 @@ namespace TracelabExperiment
         public override void Compute()
         {
             // your component implementation
-    
+            try
+            {
+                Logger.Trace(this.Configuration.Artifacts.Absolute);
+            }
+            catch(Exception e)
+            {
+                Logger.Trace("Error: Please include an input artifact", e);
+                return;
+            }
             var inputFile = this.Configuration.Artifacts.Absolute;
             
             string strCmdText;
-            strCmdText = "/C ipconfig/all";
-            System.Diagnostics.Process.Start("CMD.exe", strCmdText);
+            string strStartingText;
+            strStartingText = "/C ";
+            strCmdText = "ipconfig/all";
+            System.Diagnostics.Process.Start("CMD.exe", (strStartingText + inputFile));
             Logger.Trace(inputFile);
             Logger.Trace("Worked");
             

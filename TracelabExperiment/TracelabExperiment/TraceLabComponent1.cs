@@ -30,27 +30,39 @@ namespace TracelabExperiment
         }
         public override void Compute()
         {
-            // your component implementation
+            // Check for input artifact
             try
             {
                 Logger.Trace(this.Configuration.Artifacts.Absolute);
             }
             catch(Exception e)
             {
-                Logger.Trace("Error: Please include an input artifact", e);
+                Logger.Trace("Error: Missing input artifact", e);
                 return;
             }
+            //Run command line tool with parameters
             var inputFile = this.Configuration.Artifacts.Absolute;
-            
+            try
+            {
+                Logger.Trace(this.Configuration.OutputDirectory.Absolute);
+            }
+            catch(Exception e)
+            {
+                Logger.Trace("Error: Invalid output directory", e);
+            }
+
+            var outputDirectory = this.Configuration.OutputDirectory.Absolute;
+
             string strCmdText;
             string strStartingText;
             strStartingText = "/C ";
             strCmdText = "ipconfig/all";
             System.Diagnostics.Process.Start("CMD.exe", (strStartingText + inputFile));
+            //DEBUGGING prints
             Logger.Trace(inputFile);
             Logger.Trace("Worked");
-            
-            //Workspace.Store("outputName", 5);
+            //Store values?
+            Workspace.Store("outputName", 5);
         }
     }
 }

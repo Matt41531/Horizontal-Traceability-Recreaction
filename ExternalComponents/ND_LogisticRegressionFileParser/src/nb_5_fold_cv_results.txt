@@ -1,0 +1,18 @@
+                         precision  recall  f1-score  support
+              apiAnswer         0.87      0.62        0.72  44.4
+            apiQuestion         0.41      0.29        0.34  18.0
+    clarificationAnswer         0.29      0.17        0.21  30.0
+  clarificationQuestion         0.28      0.14        0.18  40.0
+           confirmation         0.71      0.69         0.7  45.8
+    documentationAnswer         0.21      0.33        0.26  5.2
+   implementationAnswer         0.11      0.09         0.1  8.0
+ implementationQuestion         0.35       0.3        0.32  10.8
+implementationStatement          0.0       0.0         0.0  3.0
+            instruction         0.81      0.59        0.68  51.2
+           introduction         0.87      0.82        0.83  10.6
+              statement         0.59      0.23        0.33  63.4
+           systemAnswer         0.28       0.3        0.29  5.4
+         systemQuestion          0.3      0.26        0.26  4.8
+           unsureAnswer         0.54      0.65        0.58  6.0
+              avg/total         0.57      0.41        0.46  23.11
+

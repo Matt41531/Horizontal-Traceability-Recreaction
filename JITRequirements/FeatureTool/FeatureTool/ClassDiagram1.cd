@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FeatureTool.LDA" Collapsed="true">
+    <Position X="14.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AYAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAIEAAAAA=</HashCode>
+      <FileName>LDA\LDA.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.LDAModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DgAAAEIAAAAAACQAAAIIAAQAAAAAIAAAVABAAAAgAAA=</HashCode>
+      <FileName>LDA\LDAModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FeatureTool.LDAPredictionModel" Collapsed="true">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAEAAAIAAAAAACAAAAIIAAQAAAAAAAAABABAAAAAAAg=</HashCode>
+      <FileName>LDA\LDAPredictionModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.LDAShared" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>jBRAAEIAEAgCACQAIAIIAAQAAAEAIAEAVABAAAAgQAA=</HashCode>
+      <FileName>LDA\LDAShared.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FeatureTool.LDATopicInferenceModel" Collapsed="true">
+    <Position X="13" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DEAAAAIAAAAAACQAAAIIAAQAAAAAAAAABABAAAAgAAA=</HashCode>
+      <FileName>LDA\LDATopicInferenceModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.Utilities" Collapsed="true">
+    <Position X="13" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAgAAAAAAAAAAAAAABAAAAAhAAAAAAAAAAAAgIAAA=</HashCode>
+      <FileName>LDA\Utilities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.LSA" Collapsed="true">
+    <Position X="14.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IoQAAACDAAoAgAAIBCQCACAEAAAAEAAQCAAABAACAMA=</HashCode>
+      <FileName>LSA\LSA.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.Among" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAMAAACAABAAAAAAAAAAAAAEAAIAAAAAAAAA=</HashCode>
+      <FileName>LSA\NotUsed\Among.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.EnglishStemmer" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AwAAAIAgAAEAAAAoKEAAAEAAAhQAAAGAAAIAAwEAgEA=</HashCode>
+      <FileName>LSA\NotUsed\EnglishStemmer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.EverGrowingDictionary" Collapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAEAAAAAAAAgAAIBhEIAgAAAABACAACFAAAgA=</HashCode>
+      <FileName>LSA\NotUsed\EverGrowingDictionary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.SnowballProgram" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gCSAAAAAAABBEAFAAAwEAQAAggXIggAAAAAIFBAQFQA=</HashCode>
+      <FileName>LSA\NotUsed\SnowballProgram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.StopWordFilter" Collapsed="true">
+    <Position X="11.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAwAQAAAAAIAAAAAAADACAAAAAAAEA=</HashCode>
+      <FileName>LSA\NotUsed\StopWordFilter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.SMat" Collapsed="true">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAQAAABAAAAAEACAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>LSA\SVD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.DMat" Collapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAACAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>LSA\SVD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.SVDRec" Collapsed="true">
+    <Position X="7.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAEAAAAAACAAAA=</HashCode>
+      <FileName>LSA\SVD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.SVD" Collapsed="true">
+    <Position X="14.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>NApEJAESAAMQUAAgDhEQMGCDEiAkICgDEoMAQAAAAkQ=</HashCode>
+      <FileName>LSA\SVD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.MainForm" Collapsed="true">
+    <Position X="7.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAIQgIBGASwRU9AQbALoJBIDBgARUhAACAIIAIJAACw=</HashCode>
+      <FileName>MainForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.Program" Collapsed="true">
+    <Position X="13" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.TFIDFMeasure" Collapsed="true">
+    <Position X="9.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>A4ABEgQ0FAQBAAAAACAAAAAAAggABKAAAEAAAAAEmAA=</HashCode>
+      <FileName>TFIDF\TFIDFMeasure.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.NGram" Collapsed="true">
+    <Position X="9.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAgAAAAAIAAABAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Tokeniser\NGram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.PorterStemming" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAoAAAIQAUAAAAEAgIAAAABEUCIAABAowEBAAACAgg=</HashCode>
+      <FileName>Tokeniser\PorterStemming.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FeatureTool.StopWordsHandler" Collapsed="true">
+    <Position X="13" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABIAAACAEAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Tokeniser\StopWordsHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.Tokeniser" Collapsed="true">
+    <Position X="11.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAIAAACAAAAAABAAAQAAAAAEAIAQAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Tokeniser\Tokeniser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.BugzillaFeatureCollection" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>XML\BugzillaFeatureCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.Feature" Collapsed="true">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAQAAAIAAAIAAICAAAAAAAhAAAgAAAAAAAAgQ=</HashCode>
+      <FileName>XML\Feature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.FeatureCollection" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAEAAAAAAAA=</HashCode>
+      <FileName>XML\FeatureCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.TestFeatureCollection" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>XML\TestFeatureCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.TigrisFeatureCollection" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>XML\TigrisFeatureCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.Properties.Resources" Collapsed="true">
+    <Position X="14.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeatureTool.Properties.Settings" Collapsed="true">
+    <Position X="7.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="FeatureTool.ILDA" Collapsed="true">
+    <Position X="7.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>LDA\LDAModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FeatureTool.StemmerInterface" Collapsed="true">
+    <Position X="9.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Tokeniser\PorterStemming.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="FeatureTool.svdCounters" Collapsed="true">
+    <Position X="9.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>LSA\SVD.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FeatureTool.storeVals" Collapsed="true">
+    <Position X="7.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>LSA\SVD.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

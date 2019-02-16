@@ -1,0 +1,33 @@
+AUTHORS
+
+Collin McMillan <cmc@nd.edu>, 6/23/2016
+
+PURPOSE
+
+This component reads a call graph and computes the PageRank for every node (i.e. function/method) in that graph.
+
+CONFIGURATION PARAMETERS
+
+None.
+
+WORKSPACE INPUTS
+
+callgraph : A variable of type HashMap<String, List<String>> that contains the call graph.  Usually created by the ND_CallGraphGen component.
+
+WORKSPACE OUTPUTS
+
+pageranks : A variable of type HashMap<String, Double> that contains a mapping of qualified method names to the PageRank values.
+
+ENVIRONMENT OUTPUTS
+
+None.
+
+BUILD NOTES
+
+Be sure to set JAVA_HOME.  E.g.:
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
+Always remember to "ant clean" before running "ant."
+
+Modify install directories in build.xml.
+

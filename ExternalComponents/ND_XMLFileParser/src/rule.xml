@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit xmlns="http://www.srcML.org/srcML/src" revision="0.9.5" language="Java" filename="Rule.java">
+<import>import static <name><name>java</name><operator>.</operator><name>lang</name><operator>.</operator><name>Math</name><operator>.</operator><name>*</name></name>;</import>
+
+<import>import <name><name>java</name><operator>.</operator><name>util</name><operator>.</operator><name>Iterator</name></name>;</import>
+
+<class><specifier>public</specifier> class <name>Rule</name> <block>{
+	<decl_stmt><decl><specifier>private</specifier> <type><name>String</name></type> <name>klass</name></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <type><name><name>Condition</name><index>[]</index></name></type> <name>conditions</name></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <type><name>double</name></type> <name>score</name></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <specifier>static</specifier> <type><name>double</name></type> <name>maxScore</name> <init>= <expr><operator>-</operator><literal type="number">99999</literal></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <specifier>static</specifier> <type><name>boolean</name></type> <name>newMax</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+	<decl_stmt><decl><specifier>private</specifier> <specifier>static</specifier> <type><name>double</name></type> <name>scoreSum</name> <init>= <expr><literal type="number">0.0</literal></expr></init></decl>;</decl_stmt>
+	
+	<constructor><specifier>public</specifier> <name>Rule</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>inklass</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>incolumn</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>infeature</name></decl></parameter>)</parameter_list><block>{
+		<expr_stmt><expr><name>klass</name> <operator>=</operator> <name>inklass</name></expr>;</expr_stmt>
+		<expr_stmt><expr><name>conditions</name> <operator>=</operator> <operator>new</operator> <name><name>Condition</name><index>[<expr><literal type="number">1</literal></expr>]</index></name></expr>;</expr_stmt>
+		<expr_stmt><expr><name><name>conditions</name><index>[<expr><literal type="number">0</literal></expr>]</index></name> <operator>=</operator> <operator>new</operator> <call><name>Condition</name><argument_list>(<argument><expr><name>incolumn</name></expr></argument>, <argument><expr><name>infeature</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		<expr_stmt><expr><name>score</name> <operator>=</operator> <literal type="number">0.0</literal></expr>;</expr_stmt>
+	}</block></constructor>
+	
+	<constructor><specifier>public</specifier> <name>Rule</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>inklass</name></decl></parameter>)</parameter_list>
+	<block>{
+		<expr_stmt><expr><name>klass</name> <operator>=</operator> <name>inklass</name></expr>;</expr_stmt>
+		<expr_stmt><expr><name>conditions</name> <operator>=</operator> <operator>new</operator> <name><name>Condition</name><index>[<expr><literal type="number">0</literal></expr>]</index></name></expr>;</expr_stmt>
+		<expr_stmt><expr><name>score</name> <operator>=</operator> <literal type="number">0.0</literal></expr>;</expr_stmt>
+	}</block></constructor>
+	
+	<function><specifier>public</specifier> <type><name>String</name></type> <name>getKlass</name><parameter_list>()</parameter_list>
+	<block>{
+		<return>return <expr><name>klass</name></expr>;</return>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>double</name></type> <name>getScore</name><parameter_list>()</parameter_list>
+	<block>{
+		<return>return <expr><name>score</name></expr>;</return>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <specifier>static</specifier> <type><name>double</name></type> <name>getMaxScore</name><parameter_list>()</parameter_list><block>{
+		<return>return <expr><name>maxScore</name></expr>;</return>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <specifier>static</specifier> <type><name>void</name></type> <name>resetMaxScore</name><parameter_list>()</parameter_list><block>{
+		<expr_stmt><expr><name>maxScore</name> <operator>=</operator> <literal type="number">0.0</literal></expr>;</expr_stmt>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <specifier>static</specifier> <type><name>double</name></type> <name>getScoreSum</name><parameter_list>()</parameter_list><block>{
+		<return>return <expr><name>scoreSum</name></expr>;</return>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <specifier>static</specifier> <type><name>void</name></type> <name>resetScoreSum</name><parameter_list>()</parameter_list><block>{
+		<expr_stmt><expr><name>scoreSum</name> <operator>=</operator> <literal type="number">0.0</literal></expr>;</expr_stmt>
+	}</block></function>
+	
+	<function><specifier>static</specifier> <type><name>boolean</name></type> <name>hasImproved</name><parameter_list>()</parameter_list><block>{
+		<if>if <condition>(<expr><name><name>Rule</name><operator>.</operator><name>newMax</name></name></expr>)</condition><then> <block>{
+			<expr_stmt><expr><name><name>Rule</name><operator>.</operator><name>newMax</name></name> <operator>=</operator> <literal type="boolean">false</literal></expr>;</expr_stmt>
+			<return>return <expr><literal type="boolean">true</literal></expr>;</return>
+		}</block></then>
+		<else>else<block>{
+			<return>return <expr><literal type="boolean">false</literal></expr>;</return>
+		}</block></else></if>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name><name>Condition</name><index>[]</index></name></type> <name>getConditions</name><parameter_list>()</parameter_list><block>{
+		<return>return <expr><name>conditions</name></expr>;</return>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>addCondtion</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>column</name></decl></parameter>, <parameter><decl><type><name>String</name></type> <name>feature</name></decl></parameter>)</parameter_list><block>{
+		<decl_stmt><decl><type><name>boolean</name></type> <name>found</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+		<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><name><name>conditions</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block>{
+			<if>if <condition>(<expr><call><name><name>column</name><operator>.</operator><name>equals</name></name><argument_list>(<argument><expr><name><name>conditions</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>getColumn</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>)</condition><then><block>{
+				<if>if <condition>(<expr><operator>!</operator><operator>(</operator><name><name>conditions</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>member</name><argument_list>(<argument><expr><name>feature</name></expr></argument>)</argument_list></call><operator>)</operator></expr>)</condition><then><block>{<comment type="line">//if it is not a member of the list already</comment>
+					<expr_stmt><expr><name><name>conditions</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>addFeature</name><argument_list>(<argument><expr><name>feature</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+				}</block></then></if>
+				<expr_stmt><expr><name>found</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+			}</block></then></if>
+		}</block></for>
+		<if>if<condition>(<expr><operator>!</operator><name>found</name></expr>)</condition><then><block>{
+			<decl_stmt><decl><type><name><name>Condition</name><index>[]</index></name></type> <name>newconditions</name> <init>= <expr><operator>new</operator> <name><name>Condition</name><index>[<expr><name><name>conditions</name><operator>.</operator><name>length</name></name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+			<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><name><name>conditions</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block>{
+				<expr_stmt><expr><name><name>newconditions</name><index>[<expr><name>i</name></expr>]</index></name> <operator>=</operator> <name><name>conditions</name><index>[<expr><name>i</name></expr>]</index></name></expr>;</expr_stmt>
+			}</block></for>
+			<expr_stmt><expr><name><name>newconditions</name><index>[<expr><name><name>newconditions</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <operator>new</operator> <call><name>Condition</name><argument_list>(<argument><expr><name>column</name></expr></argument>, <argument><expr><name>feature</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block></then></if>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>addConditions</name><parameter_list>(<parameter><decl><type><name>String</name></type> <name>column</name></decl></parameter>, <parameter><decl><type><name><name>String</name><index>[]</index></name></type> <name>features</name></decl></parameter>)</parameter_list><block>{
+		<decl_stmt><decl><type><name>boolean</name></type> <name>found</name> <init>= <expr><literal type="boolean">false</literal></expr></init></decl>;</decl_stmt>
+		<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><name><name>conditions</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block>{
+			<if>if <condition>(<expr><call><name><name>column</name><operator>.</operator><name>equals</name></name><argument_list>(<argument><expr><name><name>conditions</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>getColumn</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>)</condition><then><block>{
+				<for>for <control>(<init><decl><type><name>int</name></type> <name>j</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name><operator>&lt;</operator><name><name>features</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control><block>{
+					<if>if <condition>(<expr><operator>!</operator><operator>(</operator><name><name>conditions</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>member</name><argument_list>(<argument><expr><name><name>features</name><index>[<expr><name>j</name></expr>]</index></name></expr></argument>)</argument_list></call><operator>)</operator></expr>)</condition><then><block>{<comment type="line">//if it is not a member of the list already</comment>
+						<expr_stmt><expr><name><name>conditions</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>addFeature</name><argument_list>(<argument><expr><name><name>features</name><index>[<expr><name>j</name></expr>]</index></name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+					}</block></then></if>
+				}</block></for>
+				<expr_stmt><expr><name>found</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+			}</block></then></if>
+		}</block></for>
+		
+		<if>if <condition>(<expr><operator>!</operator><name>found</name></expr>)</condition><then><block>{
+			<decl_stmt><decl><type><name>Condition</name></type> <name>c</name> <init>= <expr><operator>new</operator> <call><name>Condition</name><argument_list>(<argument><expr><name>column</name></expr></argument>, <argument><expr><name>features</name></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name><name>Condition</name><index>[]</index></name></type> <name>newConditions</name> <init>= <expr><operator>new</operator> <name><name>Condition</name><index>[<expr><name><name>conditions</name><operator>.</operator><name>length</name></name> <operator>+</operator> <literal type="number">1</literal></expr>]</index></name></expr></init></decl>;</decl_stmt>
+			<for>for <control>(<init><decl><type><name>int</name></type> <name>j</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>j</name><operator>&lt;</operator><name><name>conditions</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>j</name><operator>++</operator></expr></incr>)</control><block>{
+				<expr_stmt><expr><name><name>newConditions</name><index>[<expr><name>j</name></expr>]</index></name> <operator>=</operator> <name><name>conditions</name><index>[<expr><name>j</name></expr>]</index></name></expr>;</expr_stmt>
+			}</block></for>
+			<expr_stmt><expr><name><name>newConditions</name><index>[<expr><name><name>newConditions</name><operator>.</operator><name>length</name></name> <operator>-</operator> <literal type="number">1</literal></expr>]</index></name> <operator>=</operator> <operator>new</operator> <call><name>Condition</name><argument_list>(<argument><expr><name>column</name></expr></argument>, <argument><expr><name>features</name></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+			<expr_stmt><expr><name>conditions</name> <operator>=</operator> <name>newConditions</name></expr>;</expr_stmt>
+		}</block></then></if>
+		
+	}</block></function>
+	
+	<function><specifier>static</specifier> <type><name>Rule</name></type> <name>combine</name><parameter_list>(<parameter><decl><type><name>Rule</name></type> <name>rule1</name></decl></parameter>, <parameter><decl><type><name>Rule</name></type> <name>rule2</name></decl></parameter>)</parameter_list><block>{
+		<decl_stmt><decl><type><name>Rule</name></type> <name>newRule</name> <init>= <expr><operator>new</operator> <call><name>Rule</name><argument_list>(<argument><expr><call><name><name>rule1</name><operator>.</operator><name>getKlass</name></name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr></init></decl>;</decl_stmt>
+		<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>rule1</name><operator>.</operator><name>getConditions</name></name><argument_list>()</argument_list></call><operator>.</operator><name>length</name></expr>;</condition><incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block>{
+			<expr_stmt><expr><call><name><name>newRule</name><operator>.</operator><name>addConditions</name></name><argument_list>(<argument><expr><call><name><name>rule1</name><operator>.</operator><name>getConditions</name></name><argument_list>()</argument_list></call><index>[<expr><name>i</name></expr>]</index><operator>.</operator><call><name>getColumn</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>rule1</name><operator>.</operator><name>getConditions</name></name><argument_list>()</argument_list></call><index>[<expr><name>i</name></expr>]</index><operator>.</operator><call><name>getFeatures</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block></for>
+		<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><call><name><name>rule2</name><operator>.</operator><name>getConditions</name></name><argument_list>()</argument_list></call><operator>.</operator><name>length</name></expr>;</condition><incr><expr><name>i</name><operator>++</operator></expr></incr>)</control><block>{
+			<expr_stmt><expr><call><name><name>newRule</name><operator>.</operator><name>addConditions</name></name><argument_list>(<argument><expr><call><name><name>rule2</name><operator>.</operator><name>getConditions</name></name><argument_list>()</argument_list></call><index>[<expr><name>i</name></expr>]</index><operator>.</operator><call><name>getColumn</name><argument_list>()</argument_list></call></expr></argument>, <argument><expr><call><name><name>rule2</name><operator>.</operator><name>getConditions</name></name><argument_list>()</argument_list></call><index>[<expr><name>i</name></expr>]</index><operator>.</operator><call><name>getFeatures</name><argument_list>()</argument_list></call></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+		}</block></for>
+		<return>return <expr><name>newRule</name></expr>;</return>
+		
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>boolean</name></type> <name>match</name><parameter_list>(<parameter><decl><type><name>Row</name></type> <name>r</name></decl></parameter>, <parameter><decl><type><name>Table</name></type> <name>t</name></decl></parameter>)</parameter_list><block>{
+		<for>for <control>(<init><decl><type><name>int</name></type> <name>i</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</init> <condition><expr><name>i</name><operator>&lt;</operator><name><name>conditions</name><operator>.</operator><name>length</name></name></expr>;</condition> <incr><expr><name>i</name><operator>++</operator></expr></incr>)</control>
+		<block>{
+			<decl_stmt><decl><type><name>String</name></type> <name>col</name> <init>= <expr><name><name>conditions</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>getColumn</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name><name>Iterator</name><argument_list type="generic">&lt;<argument><name>Column</name></argument>&gt;</argument_list></name></type> <name>colitr</name> <init>= <expr><call><name><name>t</name><operator>.</operator><name>getColumns</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>iterator</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+			<decl_stmt><decl><type><name>int</name></type> <name>j</name><init>=<expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+			<while>while<condition>(<expr><call><name><name>colitr</name><operator>.</operator><name>hasNext</name></name><argument_list>()</argument_list></call></expr>)</condition><block>{
+				<if>if<condition>(<expr><call><name><name>colitr</name><operator>.</operator><name>next</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>getName</name><argument_list>()</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><name>col</name></expr></argument>)</argument_list></call></expr>)</condition><then><block>{
+					<if>if<condition>(<expr><operator>!</operator><name><name>conditions</name><index>[<expr><name>i</name></expr>]</index></name><operator>.</operator><call><name>member</name><argument_list>(<argument><expr><call><name><name>r</name><operator>.</operator><name>getValue</name></name><argument_list>(<argument><expr><name>j</name></expr></argument>)</argument_list></call></expr></argument>)</argument_list></call></expr>)</condition><then><block>{
+						<return>return <expr><literal type="boolean">false</literal></expr>;</return>
+					}</block></then></if>
+				}</block></then></if>
+				<expr_stmt><expr><name>j</name><operator>++</operator></expr>;</expr_stmt>
+			}</block></while>
+		}</block></for>
+		<return>return <expr><literal type="boolean">true</literal></expr>;</return>
+	}</block></function>
+	<comment type="line">//Checks if row meets the condition of the row.</comment>
+	
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>scoreRule</name><parameter_list>(<parameter><decl><type><name>Table</name></type> <name>t</name></decl></parameter>)</parameter_list><block>{
+		<expr_stmt><expr><call><name>scoreRule</name><argument_list>(<argument><expr><name>t</name></expr></argument>, <argument><expr><literal type="number">0</literal></expr></argument>)</argument_list></call></expr>;</expr_stmt>
+	}</block></function>
+	
+	<function><specifier>public</specifier> <type><name>void</name></type> <name>scoreRule</name><parameter_list>(<parameter><decl><type><name>Table</name></type> <name>t</name></decl></parameter>, <parameter><decl><type><name>int</name></type> <name>method</name></decl></parameter>)</parameter_list><block>{
+		<decl_stmt><decl><type><name>int</name></type> <name>a</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>b</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>c</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>, <decl><type ref="prev"/><name>d</name> <init>= <expr><literal type="number">0</literal></expr></init></decl>;</decl_stmt>
+		<decl_stmt><decl><type><name><name>Iterator</name><argument_list type="generic">&lt;<argument><name>Row</name></argument>&gt;</argument_list></name></type> <name>rowitr</name> <init>= <expr><call><name><name>t</name><operator>.</operator><name>getRows</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>iterator</name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+		<while>while<condition>(<expr><call><name><name>rowitr</name><operator>.</operator><name>hasNext</name></name><argument_list>()</argument_list></call></expr>)</condition><block>{
+			<decl_stmt><decl><type><name>Row</name></type> <name>r</name> <init>= <expr><call><name><name>rowitr</name><operator>.</operator><name>next</name></name><argument_list>()</argument_list></call></expr></init></decl>;</decl_stmt>
+			<if>if <condition>(<expr><call><name>match</name><argument_list>(<argument><expr><name>r</name></expr></argument>, <argument><expr><name>t</name></expr></argument>)</argument_list></call></expr>)</condition><then><block>{
+				<if>if<condition>(<expr><call><name><name>r</name><operator>.</operator><name>getKlass</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><name>klass</name></expr></argument>)</argument_list></call></expr>)</condition><then><block>{
+					<expr_stmt><expr><name>d</name><operator>++</operator></expr>;</expr_stmt>
+				}</block></then>
+				<else>else<block>{
+					<expr_stmt><expr><name>c</name><operator>++</operator></expr>;</expr_stmt>
+				}</block></else></if>
+			}</block></then>
+			<else>else<block>{
+				<if>if<condition>(<expr><call><name><name>r</name><operator>.</operator><name>getKlass</name></name><argument_list>()</argument_list></call><operator>.</operator><call><name>equals</name><argument_list>(<argument><expr><name>klass</name></expr></argument>)</argument_list></call></expr>)</condition><then><block>{
+					<expr_stmt><expr><name>b</name><operator>++</operator></expr>;</expr_stmt>
+				}</block></then>
+				<else>else<block>{
+					<expr_stmt><expr><name>a</name><operator>++</operator></expr>;</expr_stmt>
+				}</block></else></if>
+			}</block></else></if>
+		}</block></while>
+		<decl_stmt><decl><type><name>double</name></type> <name>result</name> <init>= <expr><literal type="number">0.0</literal></expr></init></decl>;</decl_stmt>
+		<switch>switch <condition>(<expr><name>method</name></expr>)</condition><block>{
+			<case>case <expr><literal type="number">0</literal></expr>:</case>
+			<default>default:</default>
+				<if>if <condition>(<expr><name>a</name> <operator>!=</operator> <literal type="number">0</literal> <operator>||</operator> <name>d</name> <operator>!=</operator> <literal type="number">0</literal></expr>)</condition><then><block>{
+					<expr_stmt><expr><name>result</name> <operator>=</operator> <call>(<name>double</name>) <argument_list>(<argument><expr><name>a</name> <operator>+</operator> <name>d</name></expr></argument>)</argument_list></call><operator>/</operator> <operator>(</operator><call>(<name>double</name>) <argument_list>(<argument><expr><name>a</name> <operator>+</operator> <name>b</name> <operator>+</operator> <name>c</name> <operator>+</operator> <name>d</name></expr></argument>)</argument_list></call><operator>)</operator></expr>;</expr_stmt>
+				}</block></then></if>
+				<break>break;</break>
+				
+		}</block></switch>
+		
+		<if>if <condition>(<expr><name>result</name> <operator>&gt;</operator> <name>maxScore</name></expr>)</condition><then><block>{
+			<expr_stmt><expr><name>maxScore</name> <operator>=</operator> <name>result</name></expr>;</expr_stmt>
+			<expr_stmt><expr><name>newMax</name> <operator>=</operator> <literal type="boolean">true</literal></expr>;</expr_stmt>
+		}</block></then></if>
+		<expr_stmt><expr><name>scoreSum</name> <operator>+=</operator> <name>result</name></expr>;</expr_stmt>
+		<expr_stmt><expr><name>score</name> <operator>=</operator> <name>result</name></expr>;</expr_stmt>
+	}</block></function>
+	<comment type="line">//Will score the rule against table t;</comment>
+	
+	<comment type="line">//Before returning, update maxScore if change occurs</comment>
+}</block></class>
+</unit>

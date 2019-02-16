@@ -1,0 +1,34 @@
+AUTHORS
+
+Breno Dantasc Cruz <bdantasc@nd.edu>
+
+PURPOSE
+
+This component that formats the output from the ND_PageRank, so it can be used by the ND_XMLSumGen component.
+
+CONFIGURATION PARAMETERS
+
+None.
+
+WORKSPACE INPUTS
+
+pageranks : A variable of type HashMap<String, Double> that contains the page ranks.  
+Usually created by the ND_PageRank component.
+
+WORKSPACE OUTPUTS
+
+None.
+
+ENVIRONMENT OUTPUTS
+
+"/tmp/ND_PageRankFormatter.txt" file that contains the formatted output from the component.
+
+BUILD NOTES
+
+Be sure to set JAVA_HOME.  E.g.:
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
+Always remember to "ant clean" before running "ant."
+
+Modify install directories in build.xml.
+

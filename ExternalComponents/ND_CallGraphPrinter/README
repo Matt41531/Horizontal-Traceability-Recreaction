@@ -1,0 +1,35 @@
+AUTHORS
+
+Collin McMillan <cmc@nd.edu>, 2/25/2016
+
+PURPOSE
+
+This is a debugging module that reads a callgraph created by ND_CallGraphGen and prints it to the TraceLab workspace console.
+
+It is not necessary to include this component in a formal release.  It is only for debugging purposes.
+
+CONFIGURATION PARAMETERS
+
+None.
+
+WORKSPACE INPUTS
+
+callgraph : A variable of type HashMap<String, List<String>> that contains the call graph.  Usually created by the ND_CallGraphGen component.
+
+WORKSPACE OUTPUTS
+
+None.
+
+ENVIRONMENT OUTPUTS
+
+None.
+
+BUILD NOTES
+
+Be sure to set JAVA_HOME.  E.g.:
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
+Always remember to "ant clean" before running "ant."
+
+Modify install directories in build.xml.
+

@@ -1,0 +1,55 @@
+<project name="ND_StringPrinter" default="ikvm">
+    <description>
+        Builds the ND_StringPrinter to jar file, then compiles this jar to dll
+        assembly using ikvmc and copies it to Components folder.
+    </description>
+
+	<property name="component.name" value="ND_StringPrinter" />
+	
+    <property name="dist.dir" value="dist" />
+     <!-- Components output directory -->
+    <property name="components.dir" value="${user.home}/TraceLab/Components" />
+
+    <!-- path to IKVM directory -->
+    <property name="ikvm.executable.dir" location="${user.home}/TraceLab/TraceLab/Main/external/ikvm/release/bin" />
+
+    <!-- path to TraceLabSDK.dll -->
+    <property name="TraceLabSDK.dll" value="${user.home}/workspace/ND_XMLFileParser/TraceLabSDK.dll" />
+
+    <!-- path to TraceLabSDK.Types.dll (not needed if TraceLab.Types.jar is not used -->
+    <!-- in case you use other ikvm jar stubs you need to add additional references in the same way -->
+    <property name="TraceLabSDK.Types.dll" value="${user.home}/TraceLab/TraceLab/Main/Types/TraceLabSDK.Types.dll" />
+
+    <!-- path to mscorlib.dll (not always needed)
+         If .Net framework is not installed you may find it in the contrib TraceLabLib folder -->
+    <property name="mscorlib.dll" value="${user.home}/TraceLab/TraceLab/Main/TraceLab/lib/mscorlib.dll" />
+
+    <!-- output assembly name -->
+    <property name="assembly.name" value="ND_StringPrinter.dll" />
+
+    <target name="init">
+        <mkdir dir="${dist.dir}" />
+    </target>
+
+    <!-- Creates jar file from all *.class files in the bin directory and its all subdirectories recursively -->
+    <target name="makejar" depends="init" description="Create a jar from class files">
+        <jar jarfile="${dist.dir}/ND_StringPrinter.jar" includes="**/*.class" basedir="bin"/>
+    </target>
+
+    <!-- Creates .net dll file from all jar file and copies that dll to components directory -->
+    <target name="ikvm" depends="makejar">
+        <exec dir="${dist.dir}" executable="${ikvm.executable.dir}/ikvmc.exe">
+            <arg value="-r:${TraceLabSDK.dll}"/>
+            <arg value="-r:${TraceLabSDK.Types.dll}"/>
+            <arg value="-r:${mscorlib.dll}"/>
+            <arg value="-out:${assembly.name}"/>
+            <arg file="${dist.dir}/ND_StringPrinter.jar"/>
+        </exec>
+        <copy file="${dist.dir}/${assembly.name}" todir="${components.dir}/" />
+    </target>    
+
+    <target name="clean">
+        <delete dir="${dist.dir}" />
+    </target>
+
+</project>

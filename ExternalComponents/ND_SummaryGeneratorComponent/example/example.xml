@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+
+<method_list>
+	<averages>
+		<called>1</called>
+		<calls>1</calls>
+		<pagerank>.51</pagerank>
+	</averages>
+
+	<method>
+		<id>1</id>
+		<name>read</name>
+		<class>NotreDame</class>
+		<returntype>char</returntype>
+		<called>
+			<id>3</id>
+			<id>4</id>
+		</called>
+		<calls>
+			<id>2</id>
+		</calls>
+		<use>
+			<type>iteration</type>
+			<example>While(file.read() != null)</example>
+		</use>
+		<pagerank>.8</pagerank>
+	</method>
+
+	<method>
+		<id>2</id>
+		<name>skipWhitespace</name>
+		<class>NotreDame</class>
+		<returntype>void</returntype>
+		<called>
+			<id>1</id>
+		</called>
+		<calls>
+			<id>3</id>
+		</calls>
+		<use>
+			<type>procedural</type>
+			<example>file.skipWhitespace();</example>
+		</use>
+		<pagerank>.2</pagerank>
+		<swum>
+			<object>whitespace</object>
+			<verb>skip</verb>
+		</swum>
+	</method>
+
+	<method>
+		<id>3</id>
+		<name>processElement</name>
+		<class>NotreDame</class>
+		<returntype>XmlElement</returntype>
+		<called>
+			<id>2</id>
+		</called>
+		<calls> 
+			<id>1</id>
+		</calls>
+		<use>
+			<type>assignment</type>
+			<example>XmlElement xmlel = inXML.processElement();</example>
+		</use>
+		<pagerank>.5</pagerank>
+                <swum>
+                        <object>xml element</object>
+                        <verb>process</verb>
+                </swum>
+	</method>
+
+	<method>
+		<id>4</id>
+		<name>parseXml</name>
+		<class>NotreDame</class>
+		<returntype>void</returntype>
+		<called>
+		</called>
+		<calls>
+			<id>1</id>
+		</calls>
+		<use>
+			<type>if</type>
+			<example>if (xml.parseXML()){</example>
+		</use>
+		<pagerank>.4</pagerank>
+		<swum>
+			<object>xml</object>
+			<verb>parse</verb>
+		</swum>
+	</method>
+
+</method_list>
+

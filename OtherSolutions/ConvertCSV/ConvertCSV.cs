@@ -32,9 +32,6 @@ namespace ConvertCSV
                 {
                     String line = sr.ReadToEnd();
 
-                    char oldChar = ',';
-                    char newChar = '.';
-
                     String newline = line.Replace(',', '.');
 
                     var newfile = new StringBuilder();

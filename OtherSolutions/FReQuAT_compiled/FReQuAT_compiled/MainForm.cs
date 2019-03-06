@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
+//using System.Windows.Forms;
 using System.Diagnostics;
 using MicrosoftResearch.Infer.Distributions;
 using MicrosoftResearch.Infer.Maths;
@@ -9123,11 +9123,12 @@ namespace FReQuAT_compiled
         }
     }
 
-    public partial class MainForm : Form
+
+    public partial class MainForm /*: Form */
     {
         DataSet dsFeatures = new DataSet();
-        BindingSource bsComments = new BindingSource();
-        BindingSource bsFeatures = new BindingSource();
+        /////BindingSource bsComments = new BindingSource();
+        /////BindingSource bsFeatures = new BindingSource();
         FeatureCollection fc;
         TFIDFMeasure tf;
         public static string logfile;
@@ -9144,27 +9145,65 @@ namespace FReQuAT_compiled
         double simCut = 0.5;
         /* PAY ATTENTION TO TFIDF Cut-off at 0.x SIM for writing cossim file!!!!!*/
 
+        //***** added by jen *****
+        int cbMethod_SelectedIndex = 0;
+        int cbType_SelectedIndex = 0;
+        string lbFile_Text;
+        DataTable bsFeatures_DataSource;
+        DataTable bsComments_DataSource;
+        string tbK_Text;
+        string ofXML_FileName;
+        string lblTDF_Text;
+        string lblTerms_Text;
+        DataTable dgFeatures_DataSource;
+        DataTable dgComments_DataSource;
+        // ***** keeping as defaults for now *****
+        bool SM = true;
+        bool SR = false;
+        bool DW = true;
+        bool BG = false;
+        bool SY = true;
+        bool LO = true;
+        bool SC = true;
+        bool MU = false;
+        bool DO = false;
+        bool AC = true;
 
         public MainForm()
         {
-            InitializeComponent();
+            /////InitializeComponent();
 
             //by default select "AllComments"
-            cbMethod.SelectedIndex = 0;
-            cbType.SelectedIndex = type;
-            lbFile.Text = fileXML;
+            ///// cbMethod.SelectedIndex = 0; 
+            ///// cbType.SelectedIndex = type;
+            // ***** Replacing 
+            chooseFile();
+            cbType_SelectedIndex = type;
+            ///// lbFile.Text = fileXML;
+            lbFile_Text = fileXML;
             DateTime d = DateTime.Now;
             logfile = d.Year.ToString("D4") + d.Month.ToString("D2") + d.Day.ToString("D2") + "_" + d.Hour.ToString("D2") + d.Minute.ToString("D2") + d.Second.ToString("D2") + "_log.txt";
 
-        }
+            Console.WriteLine("Do you want to calculate TFIDF? (y/n)");
+            //string usrInput = Console.ReadLine();
+            string usrInput = "y";
+            if (usrInput == "y")
+            {
+                calculateTFIDF();
+            }
 
+        }
+        /*
         private void btnFill_Click(object sender, EventArgs e)
         {
             InputXML(fileXML);
-            bsFeatures.DataSource = dsFeatures.Tables[fc.bugTag];
-            bsComments.DataSource = dsFeatures.Tables["long_desc"];
-        }
-
+            ///// bsFeatures.DataSource = dsFeatures.Tables[fc.bugTag];
+            bsFeatures_DataSource = dsFeatures.Tables[fc.bugTag];
+            ///// bsComments.DataSource = dsFeatures.Tables["long_desc"];
+            bsComments_DataSource = dsFeatures.Tables["long_desc"];
+        } */
+        
+            /*
         private void btnTest_Click(object sender, EventArgs e)
         {
             DateTime start = DateTime.Now;
@@ -9176,6 +9215,7 @@ namespace FReQuAT_compiled
             ////TFIDFMeasure tf = new TFIDFMeasure(fc, cbSM.Checked, cbSR.Checked, cbDW.Checked, cbBG.Checked, cbSY.Checked, cbLO.Checked, cbSC.Checked, cbMU.Checked, cbDO.Checked);
             TFIDFMeasure tf = new TFIDFMeasure(fc, true, false, true, false, true, true, true, false, false);
             Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " TFIDF matrix calculated");
+            /* //////
             if (tbK.Text != "")
             {
                 LSA.MainLSA(fc, tf, Int32.Parse(tbK.Text));
@@ -9184,7 +9224,21 @@ namespace FReQuAT_compiled
             {
                 LSA.MainLSA(fc, tf, 0);
             }
-            Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " LSA matrix calculated for k = " + tbK.Text);
+            */ /////
+            /*
+            Console.WriteLine("Enter tbK: ");
+            tbK_Text = Console.ReadLine();
+            if (tbK_Text != "")
+            {
+                LSA.MainLSA(fc, tf, Int32.Parse(tbK_Text));
+            }
+            else
+            {
+                LSA.MainLSA(fc, tf, 0);
+            }
+             
+            ///// Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " LSA matrix calculated for k = " + tbK.Text);
+            Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " LSA matrix calculated for k = " + tbK_Text);
 
             //MessageBox.Show(LSA.GetSimilarity(0, 1).ToString());
 
@@ -9329,7 +9383,8 @@ namespace FReQuAT_compiled
                 Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " No valid duplicates found");
             }
         }
-
+        /*
+    
         //private void btnTest_Click(object sender, EventArgs e)
         //{
         //    DateTime start = DateTime.Now;
@@ -9433,29 +9488,36 @@ namespace FReQuAT_compiled
 
         private void ofXML_FileOk(object sender, CancelEventArgs e)
         {
-            lbFile.Text = ofXML.FileName;
-            fileXML = ofXML.FileName;
+            ///// lbFile.Text = ofXML.FileName;
+            lbFile_Text = ofXML_FileName;
+            ///// fileXML = ofXML.FileName;
+            fileXML = ofXML_FileName;
             dirPath = System.IO.Path.GetDirectoryName(fileXML);
             //InputXML(fileXML);
         }
 
+        /* ***** This is for when file is changed, don't worry about yet *****
         private void btnFile_Click(object sender, EventArgs e)
         {
-            ofXML.FileName = System.IO.Path.GetFileName(fileXML);
+            ///// ofXML.FileName = System.IO.Path.GetFileName(fileXML);
+            ofXML_FileName = System.IO.Path.GetFileName(fileXML);
             ofXML.ShowDialog();
         }
+        */
 
         private void InputXML(string fileName)
         {
             dsFeatures = new DataSet();
             //dsFeatures.Clear();
             dsFeatures.ReadXml(fileName);
-            dgFeatures.DataSource = bsFeatures;
-            dgComments.DataSource = bsComments;
+            ///// dgFeatures.DataSource = bsFeatures;
+            /////dgFeatures_DataSource = bsFeatures; 
+            ///// dgComments.DataSource = bsComments;
+            /////dgComments_DataSource = bsComments;
             processXML();
         }
 
-        private void btnTDF_Click(object sender, EventArgs e)
+        /*private void btnTDF_Click(object sender, EventArgs e)
         {
             Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " Start TF-IDF");
             //processXML();
@@ -9532,11 +9594,90 @@ namespace FReQuAT_compiled
                 }
                 sw.Close();
             }
+        }
+        */
+        private void calculateTFIDF()
+        {
+            Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " Start TF-IDF");
+            //processXML();
+            InputXML(fileXML);
+            StopWordsHandler stopword = new StopWordsHandler(SY);
+            if (cbMethod_SelectedIndex == 0) /* default */
+            {
+                tf = new TFIDFMeasure(fc, SM, SR, DW, BG, SY, LO, SC, MU, DO);
+                Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " End TF-IDF");
+                lblTDF_Text = "cosim(0,1) = " + tf.GetSimilarity(17, 259).ToString();
+                lblTDF_Text += "; cosim(0,2) = " + tf.GetSimilarity(0, 2).ToString();
+                Console.WriteLine(lblTDF_Text);
 
+                ////word count
+                //int wordCount = 0;
+                //for (int i = 0; i < tf._termFreq.GetLength(0); i++)
+                //{
+                //    for (int j = 0; j < tf._termFreq[0].GetLength(0); j++)
+                //    {
+                //        wordCount += tf._termFreq[i][j];
+                //    }
 
+                //}
+                //Utilities.LogMessageToFile(logfile, "TOTAL WORD COUNT: " + wordCount);
+
+                //Debug.WriteLine("Start term matrix");
+                ////write term count matrix
+                //string outputFile = dirPath + "\\termmatrix" + getFileEnding();
+                //outputFile += ".csv";
+                //System.IO.File.Delete(outputFile);
+                //System.IO.StreamWriter sw = new System.IO.StreamWriter(outputFile, true);
+                //for (int i = 0; i < tf._termFreq.GetLength(0); i++)
+                //{
+                //    string fileLine = i.ToString() + ";";
+                //    for (int j = 0; j < tf._termFreq[0].GetLength(0); j++)
+                //    {
+                //        fileLine += tf._termFreq[i][j].ToString() + ";";
+                //    }
+                //    sw.WriteLine(fileLine);
+                //    Debug.WriteLine(fileLine);
+                //}
+                //sw.Close();
+                //Debug.WriteLine("Term matrix written");
+
+                ///// btnSave.Enabled = true;
+                ///// btnTerms.Enabled = true;
+            }
+            else
+            {
+                string outputFile = dirPath + "\\cossim" + getFileEnding();
+                outputFile += "_xref.csv";
+                System.IO.File.Delete(outputFile);
+                System.IO.StreamWriter sw = new System.IO.StreamWriter(outputFile, true);
+                sw.WriteLine("Title_i;ID_i;Doc_j;ID_j;Cosine Similarity");
+                for (int i = 0; i < fc.featureList.Count; i++)
+                {
+                    Feature f1 = fc.featureList[i];
+                    //if (f1.id == "224119" || f1.id == "238186" || f1.id == "343755" || f1.id == "344748" ||
+                    //   f1.id == "353263" || f1.id == "363984" || f1.id == "364870" || f1.id == "376807" ||
+                    //   f1.id == "378528" || f1.id == "394920")
+                    //{
+
+                    tf = new TFIDFMeasure(fc, i, SM, SR, DW, BG, SY, LO, SC, MU, DO);
+                    for (int j = 0; j < fc.featureList.Count; j++)
+                    {
+                        if (j != i)
+                        {
+                            Feature f2 = fc.featureList[j];
+                            sw.WriteLine(i.ToString() + ";" + f1.id + ";" + j.ToString() + ";" + f2.id + ";" + tf.GetSimilarity(i, j).ToString());
+                        }
+                    }
+                    lblTDF_Text = i.ToString() + "done!";
+                    ///// lblTDF.Refresh();
+                    //}
+                }
+                sw.Close();
+            }
         }
 
-        private void btnTerms_Click(object sender, EventArgs e)
+        /*
+            private void btnTerms_Click(object sender, EventArgs e)
         {
             string outputFile = dirPath + "\\terms" + getFileEnding() + ".txt";
             System.IO.File.Delete(outputFile);
@@ -9550,8 +9691,9 @@ namespace FReQuAT_compiled
             sw1.Close();
             lblTerms.Text = "Count: " + cnt.ToString();
             System.Diagnostics.Process.Start(outputFile);
-        }
+        } */
 
+            /*
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (cbMethod.SelectedIndex == 0)
@@ -9584,25 +9726,26 @@ namespace FReQuAT_compiled
                 sw.Close();
                 //System.Diagnostics.Process.Start(outputFile);
             }
-        }
+        } */
 
         private void processXML()
         {
             //read XML file into Feature Collection with or without 'All comments' and 'Source code'
             if (type == 0)
             {
-                fc = new BugzillaFeatureCollection(fileXML, cbAC.Checked, cbSC.Checked, cbDW.Checked);
+                fc = new BugzillaFeatureCollection(fileXML, AC, SC, DW);
             }
             else
             {
-                fc = new TigrisFeatureCollection(fileXML, cbAC.Checked, cbSC.Checked, cbDW.Checked);
+                fc = new TigrisFeatureCollection(fileXML, AC, SC, DW);
             }
-            lblTDF.Text = "";
-            lblTerms.Text = "";
-            btnSave.Enabled = false;
-            btnTerms.Enabled = false;
+            lblTDF_Text = "";
+            lblTerms_Text = "";
+            ///// btnSave.Enabled = false;
+            ///// btnTerms.Enabled = false;
         }
 
+        /*
         private void dgFeatures_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int fID = e.RowIndex;
@@ -9612,11 +9755,13 @@ namespace FReQuAT_compiled
             ds.Merge(dr);
             bsComments.DataSource = ds.Tables["long_desc"];
         }
+        */
 
         private string getFileEnding()
         {
             string strEnd = "";
-            if (cbMethod.SelectedIndex != 0)
+            /*
+            if (cbMethod_SelectedIndex != 0)
             {
                 strEnd += "_M" + cbMethod.Text[0];
             }
@@ -9629,10 +9774,13 @@ namespace FReQuAT_compiled
                         strEnd += "_" + cb.Text.Substring(0, 2);
                     }
                 }
-            }
+            } */
+
+            strEnd = "_defaultfornow";
             return strEnd;
         }
 
+        /*
         private void btnVector_Click(object sender, EventArgs e)
         {
             //write two vectors to .xlsx file and open the file
@@ -9652,8 +9800,10 @@ namespace FReQuAT_compiled
             sw.Close();
             //System.Diagnostics.Process.Start(outputFile);
         }
+        */
 
-        private void btnCos_Click(object sender, EventArgs e)
+            /*
+            private void btnCos_Click(object sender, EventArgs e)
         {
             string val1 = nudVectorCos1.Value.ToString();
             string val2 = nudVectorCos2.Value.ToString();
@@ -9668,6 +9818,7 @@ namespace FReQuAT_compiled
                 lblCos.Text = "cosim = " + tf.GetSimilarity(v1, v2).ToString();
             }
         }
+        */
 
         private int getFeatureIndex(string id)
         {
@@ -9681,6 +9832,7 @@ namespace FReQuAT_compiled
             return -1;
         }
 
+        /*
         private void btnDup_Click(object sender, EventArgs e)
         {
             Utilities.LogMessageToFile(logfile, DateTime.Now.ToShortTimeString() + fileXML);
@@ -9890,9 +10042,10 @@ namespace FReQuAT_compiled
             {
                 MessageBox.Show("No valid duplicates found");
             }
-            */
-        }
+            
+        } */
 
+            /*
         private void tbK_TextChanged(object sender, EventArgs e)
         {
 
@@ -9973,7 +10126,7 @@ namespace FReQuAT_compiled
                         Debug.WriteLine("************************************");
                         double alpha = 1.0;
                         double beta = 0.1;
-            */
+            */ /*
 
             //for (int i = 0; i < 2; i++)
             //{
@@ -9989,8 +10142,9 @@ namespace FReQuAT_compiled
                     vocabulary);
             //}
 
-        }
+        } */
 
+            /*
         private void btnLDA_Click(object sender, EventArgs e)
         {
             for (int k = 100; k <= 200; k = k + 10)
@@ -10092,11 +10246,20 @@ namespace FReQuAT_compiled
                 }
             }
         }
+        */
 
-        private void cbType_SelectedIndexChanged(object sender, EventArgs e)
+        /*private void cbType_SelectedIndexChanged(object sender, EventArgs e)
         {
             type = cbType.SelectedIndex;
             //InputXML(fileXML);
+        }
+        */
+        private void chooseFile()
+        {
+            Console.WriteLine("Choose file:\n(1) Mylyn / Netbeans \n(2) ArgoUML");
+            //string usrInput = Console.ReadLine();
+            //type = Int32.Parse(usrInput);
+            type = 1;
         }
     }
 }

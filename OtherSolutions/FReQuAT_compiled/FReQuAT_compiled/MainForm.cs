@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,21 +12,27 @@ using MicrosoftResearch.Infer.Distributions;
 using MicrosoftResearch.Infer.Maths;
 
 /* From PorterStreaming */
+/*
 using System.Runtime.InteropServices;
 
 /* From TFIDFMeasure */
+/*
 using System.Collections;
 
 /* From Utilities */
+/*
 using System.IO;
 
 /* From LSA */
+/*
 using System.Reflection;
 
 /* From BugzillaFeatureCollection */
+/*
 using System.Xml.Linq;
 
 /* From LDATopicsInferenceModel */
+/*
 using MicrosoftResearch.Infer;
 using MicrosoftResearch.Infer.Models;
 using MicrosoftResearch.Infer.Factors;
@@ -1107,7 +1113,7 @@ namespace FReQuAT_compiled
                     //int n = System.Net.IPAddress.NetworkToHostOrder(reader.ReadInt32());
                     int n = S.rows;
                     S.pointr[c] = v;
-                    for (int i = 0; i < n; i++/*, v++*/)
+                    for (int i = 0; i < n; i++/*, v++*/ /*)
                     {
                         //int r = System.Net.IPAddress.NetworkToHostOrder(reader.ReadInt32());
                         double nBuf = (double)weightMatrix[i][c];
@@ -2858,11 +2864,14 @@ namespace FReQuAT_compiled
         }
 
         public int s_size; /* search string */
-        public System.String s; /* search string */
-        public int substring_i; /* index to longest matching substring */
-        public int result; /* result of the lookup */
-        public System.Reflection.MethodInfo method; /* method to use if substring matches */
-        public SnowballProgram methodobject; /* object to invoke method on */
+        /*
+         * 
+        public System.String s; /* search string 
+
+        public int substring_i; /* index to longest matching substring 
+        public int result; /* result of the lookup 
+        public System.Reflection.MethodInfo method; /* method to use if substring matches 
+        public SnowballProgram methodobject; /* object to invoke method on 
     }
 
     public class SnowballProgram
@@ -3244,6 +3253,7 @@ namespace FReQuAT_compiled
         /* to replace chars between c_bra and c_ket in current by the
         * chars in s.
         */
+        /*
         protected internal virtual int replace_s(int c_bra, int c_ket, System.String s)
         {
             int adjustment = s.Length - (c_ket - c_bra);
@@ -3271,6 +3281,7 @@ namespace FReQuAT_compiled
                 debug(z, -1, 0);
                 exit(1);
                 */
+                /*
             }
         }
 
@@ -3305,6 +3316,7 @@ namespace FReQuAT_compiled
         }
 
         /* Copy the slice into the supplied StringBuffer */
+        /*
         protected internal virtual System.Text.StringBuilder slice_to(System.Text.StringBuilder s)
         {
             slice_check();
@@ -3342,7 +3354,7 @@ namespace FReQuAT_compiled
         }
         }
         printf("'\n");
-        }*/
+        }
     }
 
     /// <summary> Generated class implementing code defined by a snowball script.</summary>
@@ -4976,7 +4988,7 @@ namespace FReQuAT_compiled
 
     //This is simple test of efficiency of Latent Semantic Analysis prepared by Andrew Polar.
     //Domain: EzCodeSample.com
-
+    /*
     class LSA
     {
         static StopWordFilter stopWordFilter = new StopWordFilter();
@@ -5389,10 +5401,10 @@ namespace FReQuAT_compiled
             return true;
         }
 
-        private static bool prepareDocDocMatrix(/*int nSelectedFile,*/ string resultBlockName, /*The next property is used to reduce the dimensionality in SVD.
+        private static bool prepareDocDocMatrix(/*int nSelectedFile,*//* string resultBlockName, /*The next property is used to reduce the dimensionality in SVD.
         //It tells to ignore singular values that are below the threshold
         //relativley to original. For example if it is 0.1, the value S[n] 
-        //will be set to 0.0 if S[n]/S[0] < 0.1.*/ double m_singularNumbersThreashold)
+        //will be set to 0.0 if S[n]/S[0] < 0.1.*//* double m_singularNumbersThreashold)
         {
             //read matrix
             int nRows = -1;
@@ -5684,7 +5696,7 @@ namespace FReQuAT_compiled
             m_totalCorrectCategories = 0;
             for (int i = 0; i < 128; ++i)
             {
-                prepareDocDocMatrix(/*i,*/ resultFile, 0.04);
+                prepareDocDocMatrix(/*i,*//* resultFile, 0.04);
                 findSortedListOfRelatedFiles(i, 16, chart);
             }
             int totalTests = 128 * 15;
@@ -7616,7 +7628,7 @@ namespace FReQuAT_compiled
                                                                     "xxx",
                                                                     "xxxx",
                                                                     "zoe", 
-                                                                    /*//extra for 394920
+                                                                    /*//*extra for 394920
                                                                     "bug", 
                                                                     "mark",
                                                                     "duplicate", 
@@ -7635,7 +7647,7 @@ namespace FReQuAT_compiled
                                                                     "side-by-side",
                                                                     "exist",
                                                                     "over-weight"
-                                                                    //extra for 394920*/
+                                                                    //extra for 394920*/ /*
         };
 
 
@@ -8554,7 +8566,7 @@ namespace FReQuAT_compiled
 	  * word can be provided a character at time (by calling add()), or at once
 	  * by calling one of the various stem(something) methods.
 	  */
-
+      /*
     public interface StemmerInterface
     {
         string stemTerm(string s);
@@ -8564,12 +8576,12 @@ namespace FReQuAT_compiled
     public class PorterStemming : StemmerInterface
     {
         private char[] b;
-        private int i,     /* offset into b */
-            i_end, /* offset to end of stemmed word */
+        private int i,     /* offset into b */ /*
+            i_end, /* offset to end of stemmed word */ /*
             j, k;
         private static int INC = 200;
         /* unit of size whereby b is increased */
-
+        /*
         public PorterStemming()
         {
             b = new char[INC];
@@ -8578,6 +8590,7 @@ namespace FReQuAT_compiled
         }
 
         /* Implementation of the .NET interface - added as part of realease 4 (Leif) */
+        /*
         public string stemTerm(string s)
         {
             setTerm(s);
@@ -8595,7 +8608,7 @@ namespace FReQuAT_compiled
 			instead of storing all stemmed words.
 			(Leif)
 		*/
-
+        /*
         void setTerm(string s)
         {
             i = s.Length;
@@ -8620,7 +8633,7 @@ namespace FReQuAT_compiled
 		 * Add a character to the word being stemmed.  When you are finished
 		 * adding characters, you can call stem(void) to stem the word.
 		 */
-
+         /*
         public void add(char ch)
         {
             if (i == b.Length)
@@ -8638,7 +8651,7 @@ namespace FReQuAT_compiled
 		 * of a char[] array. This is like repeated calls of add(char ch), but
 		 * faster.
 		 */
-
+         /*
         public void add(char[] w, int wLen)
         {
             if (i + wLen >= b.Length)
@@ -8657,6 +8670,7 @@ namespace FReQuAT_compiled
 		 * or a reference to the internal buffer can be retrieved by getResultBuffer
 		 * and getResultLength (which is generally more efficient.)
 		 */
+         /*
         public override string ToString()
         {
             return new String(b, 0, i_end);
@@ -8665,6 +8679,7 @@ namespace FReQuAT_compiled
         /**
 		 * Returns the length of the word resulting from the stemming process.
 		 */
+         /*
         public int getResultLength()
         {
             return i_end;
@@ -8675,12 +8690,14 @@ namespace FReQuAT_compiled
 		 * the stemming process.  You also need to consult getResultLength()
 		 * to determine the length of the result.
 		 */
+         /*
         public char[] getResultBuffer()
         {
             return b;
         }
 
         /* cons(i) is true <=> b[i] is a consonant. */
+        /*
         private bool cons(int i)
         {
             switch (b[i])
@@ -8701,6 +8718,7 @@ namespace FReQuAT_compiled
 			  <c>vcvcvc<v> gives 3
 			  ....
 		*/
+        /*
         private int m()
         {
             int n = 0;
@@ -8732,6 +8750,7 @@ namespace FReQuAT_compiled
         }
 
         /* vowelinstem() is true <=> 0,...j contains a vowel */
+        /*
         private bool vowelinstem()
         {
             int i;
@@ -8742,6 +8761,7 @@ namespace FReQuAT_compiled
         }
 
         /* doublec(j) is true <=> j,(j-1) contain a double consonant. */
+        /*
         private bool doublec(int j)
         {
             if (j < 1)
@@ -8759,6 +8779,7 @@ namespace FReQuAT_compiled
 			  snow, box, tray.
 
 		*/
+        /*
         private bool cvc(int i)
         {
             if (i < 2 || !cons(i) || cons(i - 1) || !cons(i - 2))
@@ -8785,6 +8806,7 @@ namespace FReQuAT_compiled
 
         /* setto(s) sets (j+1),...k to the characters in the string s, readjusting
 		   k. */
+           /*
         private void setto(String s)
         {
             int l = s.Length;
@@ -8796,6 +8818,7 @@ namespace FReQuAT_compiled
         }
 
         /* r(s) is used further down. */
+        /*
         private void r(String s)
         {
             if (m() > 0)
@@ -8822,7 +8845,7 @@ namespace FReQuAT_compiled
 			   meetings  ->  meet
 
 		*/
-
+        /*
         private void step1()
         {
             if (b[k] == 's')
@@ -8860,6 +8883,7 @@ namespace FReQuAT_compiled
         }
 
         /* step2() turns terminal y to i when there is another vowel in the stem. */
+        /*
         private void step2()
         {
             if (ends("y") && vowelinstem())
@@ -8869,12 +8893,14 @@ namespace FReQuAT_compiled
         /* step3() maps double suffices to single ones. so -ization ( = -ize plus
 		   -ation) maps to -ize etc. note that the string before the suffix must give
 		   m() > 0. */
+           /*
         private void step3()
         {
             if (k == 0)
                 return;
 
             /* For Bug 1 */
+            /*
             switch (b[k - 1])
             {
                 case 'a':
@@ -8920,6 +8946,7 @@ namespace FReQuAT_compiled
         }
 
         /* step4() deals with -ic-, -full, -ness etc. similar strategy to step3. */
+        /*
         private void step4()
         {
             switch (b[k])
@@ -8943,12 +8970,14 @@ namespace FReQuAT_compiled
         }
 
         /* step5() takes off -ant, -ence etc., in context <c>vcvc<v>. */
+        /*
         private void step5()
         {
             if (k == 0)
                 return;
 
             /* for Bug 1 */
+            /*
             switch (b[k - 1])
             {
                 case 'a':
@@ -8968,12 +8997,15 @@ namespace FReQuAT_compiled
                     if (ends("ement")) break;
                     if (ends("ment")) break;
                     /* element etc. not stripped before the m */
+                    /*
                     if (ends("ent")) break; return;
                 case 'o':
                     if (ends("ion") && j >= 0 && (b[j] == 's' || b[j] == 't')) break;
                     /* j >= 0 fixes Bug 2 */
+                    /*
                     if (ends("ou")) break; return;
                 /* takes care of -ous */
+                /*
                 case 's':
                     if (ends("ism")) break; return;
                 case 't':
@@ -8993,6 +9025,7 @@ namespace FReQuAT_compiled
         }
 
         /* step6() removes a final -e if m() > 1. */
+        /*
         private void step6()
         {
             j = k;
@@ -9012,6 +9045,7 @@ namespace FReQuAT_compiled
 		 * from the input.  You can retrieve the result with
 		 * getResultLength()/getResultBuffer() or toString().
 		 */
+         /*
         public void stem()
         {
             k = i - 1;
@@ -9125,6 +9159,7 @@ namespace FReQuAT_compiled
 
 
     public partial class MainForm /*: Form */
+    /*
     {
         DataSet dsFeatures = new DataSet();
         /////BindingSource bsComments = new BindingSource();
@@ -9146,6 +9181,7 @@ namespace FReQuAT_compiled
         /* PAY ATTENTION TO TFIDF Cut-off at 0.x SIM for writing cossim file!!!!!*/
 
         //***** added by jen *****
+        /*
         int cbMethod_SelectedIndex = 0;
         int cbType_SelectedIndex = 0;
         string lbFile_Text;
@@ -9504,7 +9540,7 @@ namespace FReQuAT_compiled
             ofXML.ShowDialog();
         }
         */
-
+        /*
         private void InputXML(string fileName)
         {
             dsFeatures = new DataSet();
@@ -9596,6 +9632,7 @@ namespace FReQuAT_compiled
             }
         }
         */
+        /*
         private void calculateTFIDF()
         {
             Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " Start TF-IDF");
@@ -9603,6 +9640,7 @@ namespace FReQuAT_compiled
             InputXML(fileXML);
             StopWordsHandler stopword = new StopWordsHandler(SY);
             if (cbMethod_SelectedIndex == 0) /* default */
+            /*
             {
                 tf = new TFIDFMeasure(fc, SM, SR, DW, BG, SY, LO, SC, MU, DO);
                 Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " End TF-IDF");
@@ -9643,6 +9681,7 @@ namespace FReQuAT_compiled
 
                 ///// btnSave.Enabled = true;
                 ///// btnTerms.Enabled = true;
+                /*
             }
             else
             {
@@ -9728,6 +9767,7 @@ namespace FReQuAT_compiled
             }
         } */
 
+    /*
         private void processXML()
         {
             //read XML file into Feature Collection with or without 'All comments' and 'Source code'
@@ -9757,6 +9797,7 @@ namespace FReQuAT_compiled
         }
         */
 
+    /*
         private string getFileEnding()
         {
             string strEnd = "";
@@ -9775,7 +9816,7 @@ namespace FReQuAT_compiled
                     }
                 }
             } */
-
+            /*
             strEnd = "_defaultfornow";
             return strEnd;
         }
@@ -9820,6 +9861,7 @@ namespace FReQuAT_compiled
         }
         */
 
+    /*
         private int getFeatureIndex(string id)
         {
             foreach (Feature ft in fc.featureList)
@@ -10254,6 +10296,7 @@ namespace FReQuAT_compiled
             //InputXML(fileXML);
         }
         */
+        /*
         private void chooseFile()
         {
             Console.WriteLine("Choose file:\n(1) Mylyn / Netbeans \n(2) ArgoUML");
@@ -10263,3 +10306,4 @@ namespace FReQuAT_compiled
         }
     }
 }
+*/

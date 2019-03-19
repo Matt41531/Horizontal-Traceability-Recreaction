@@ -85,7 +85,8 @@ namespace FReQuAT_compiled_component
             {
                 Logger.Trace("Error: Invalid output directory", e);
             }
-            var outputDirectory = this.Configuration.OutputDirectory.Absolute;
+            var outputDirectory = this.Configuration.OutputDirectory.Absolute; // get output directory from configuration
+            var AC = this.Configuration.AC; // get boolean value for "AC: All Comments"
             string strCmdText;
             string strStartingText = "/C ";
             strCmdText = "/C ipconfig/all";

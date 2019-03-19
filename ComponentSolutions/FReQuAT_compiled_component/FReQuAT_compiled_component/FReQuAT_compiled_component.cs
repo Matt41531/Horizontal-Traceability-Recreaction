@@ -91,10 +91,10 @@ namespace FReQuAT_compiled_component
             strCmdText = "/C ipconfig/all";
             System.Diagnostics.Process.Start("CMD.exe", (strStartingText + inputFile));
             //DEBUGGING prints        
-            Logger.Trace(inputFile);
-            Logger.Trace("Worked");
-            new MainForm(inputFile, outputDirectory);
-            Logger.Trace("TF-IDF: " + MainForm.lblTDF_Text);
+            Logger.Trace("Input file: "+ inputFile);
+            Logger.Trace("Output Directory: " + outputDirectory);
+            new MainForm(inputFile, outputDirectory); // Run program ***MainForm needs to be renamed
+            Logger.Trace("TF-IDF: " + MainForm.lblTDF_Text); // Output the TF-IDF
         }
     }
      
@@ -9235,7 +9235,7 @@ namespace FReQuAT_compiled_component
         public MainForm(string inputFile, string outputFile)
         {
             /////InitializeComponent();
-            fileXML = inputFile; // **** added **** assign configuration
+            fileXML = inputFile; // assign the XML file to be worked with
             dirPath = outputFile; // set location for log file
 
             //by default select "AllComments"
@@ -9249,8 +9249,11 @@ namespace FReQuAT_compiled_component
             DateTime d = DateTime.Now;
             logfile = outputFile + '\\' + d.Year.ToString("D4") + d.Month.ToString("D2") + d.Day.ToString("D2") + "_" + d.Hour.ToString("D2") + d.Minute.ToString("D2") + d.Second.ToString("D2") + "_log.txt";
 
-            Console.WriteLine("Do you want to calculate TFIDF? (y/n)");
+            //Console.WriteLine("Do you want to calculate TFIDF? (y/n)"); // ***No longer needed***
             //string usrInput = Console.ReadLine();
+
+            //
+
             string usrInput = "y";
             if (usrInput == "y")
             {

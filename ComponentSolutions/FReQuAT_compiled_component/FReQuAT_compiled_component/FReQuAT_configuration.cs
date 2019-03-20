@@ -7,12 +7,21 @@ using TraceLabSDK.Component.Config;
 
 namespace FReQuAT_compiled_component
 {
+    // Enum to set boolean values to On or Off
     public enum Boolean_type
     {
         On,
         Off
     }
 
+    public enum Method_type
+    {
+        TFIDF,
+        TitleVsDescription, 
+        LSA
+    }
+
+    // All of the things in the configuration file
     public class FReQuAT_configuration
     {
         [DisplayName("XML location")]
@@ -34,6 +43,10 @@ namespace FReQuAT_compiled_component
         [DisplayName("SM: Stremming")]
         [Description("Set SM: Stremming format as 'True', or 'False'")]
         public Boolean_type SM { get; set; }
+
+        [DisplayName("SR: Stop word removal")]
+        [Description("Set SR: Stop word removal format as 'True', or 'False'")]
+        public Boolean_type SR { get; set; }
 
         [DisplayName("DW: Double weight title")]
         [Description("Set DW: Double weight title format as 'True', or 'False'")]
@@ -58,5 +71,9 @@ namespace FReQuAT_compiled_component
         [DisplayName("DO: Remove words with only 1 document")]
         [Description("Set DO: Remove words with only 1 document format as 'True', or 'False'")]
         public Boolean_type DO { get; set; }
+
+        [DisplayName("Method")]
+        [Description("Set Method to 'TFIDF', 'Title vs. Description', or 'LSA'")]
+        public Method_type Method { get; set; }
     }
 }

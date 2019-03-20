@@ -36,7 +36,6 @@ using TraceLabSDK;
 using TraceLabSDK.Types;
 
 
-
 namespace FReQuAT_compiled_component
 {
     using GammaArray = DistributionStructArray<Gamma, double>;
@@ -50,7 +49,6 @@ namespace FReQuAT_compiled_component
            ConfigurationType = typeof(FReQuAT_configuration)
         )]
     [IOSpec(IOType = IOSpecType.Output, Name = "outputName", DataType = typeof(TLArtifactsCollection))]
-    //[IOSpec(IOType = IOSpecType.Output, Name = "outputName", DataType = typeof(int))]
     public class FReQuAT_compiled_component : BaseComponent
     {
         public FReQuAT_compiled_component(ComponentLogger log) : base(log) {
@@ -63,9 +61,16 @@ namespace FReQuAT_compiled_component
             set => base.Configuration = value;
         }
 
-        public override void Compute()
+        // was trying to make function for updating logger but don't think it will work 
+        /*
+        public void updateLogger(string LoggerMessage)
         {
-            // your component implementation
+            Logger.Trace(LoggerMessage);
+        } */
+
+        public override void Compute() // Compute works similar to Main()
+        {
+            // try importing XML input file
             try
             {
                 Logger.Trace(this.Configuration.XML.Absolute);
@@ -76,7 +81,7 @@ namespace FReQuAT_compiled_component
                 return;
             }
             //Run command line tool with parameters
-            var inputFile = this.Configuration.XML.Absolute;
+            var inputFile = this.Configuration.XML.Absolute; // feature requests file
             try
             {
                 Logger.Trace(this.Configuration.OutputDirectory.Absolute);
@@ -86,7 +91,20 @@ namespace FReQuAT_compiled_component
                 Logger.Trace("Error: Invalid output directory", e);
             }
             var outputDirectory = this.Configuration.OutputDirectory.Absolute; // get output directory from configuration
-            var AC = this.Configuration.AC; // get boolean value for "AC: All Comments"
+            
+            bool AC = get_bool(this.Configuration.AC); // get boolean value for "AC: All Comments"
+            bool SC = get_bool(this.Configuration.SC); // get boolean value for "SC: Source code removal"
+            bool SM = get_bool(this.Configuration.SM); // get boolean value for "SM: Stremming"
+            bool SR = get_bool(this.Configuration.SR); // get boolean value for "SR: Stop word removal"
+            bool DW = get_bool(this.Configuration.DW); // get boolean value for "DW: Double weight title"
+            bool BG = get_bool(this.Configuration.BG); // get boolean value for "BG: Bi-gram"
+            bool SY = get_bool(this.Configuration.SY); // get boolean value for "SY: Remove synonyms, spelling mistakes"
+            bool LO = get_bool(this.Configuration.LO); // get boolean value for "LO: toLower"
+            bool MU = get_bool(this.Configuration.MU); // get boolean value for "MU: Remove words with count 1"
+            bool DO = get_bool(this.Configuration.DO); // get boolean value for "DO: Remove words with only 1 document"
+
+            Method_type Method = (this.Configuration.Method); // Get method ***currently set to TFIDF, TitleVsDescription, LSA***
+
             string strCmdText;
             string strStartingText = "/C ";
             strCmdText = "/C ipconfig/all";
@@ -94,8 +112,31 @@ namespace FReQuAT_compiled_component
             //DEBUGGING prints        
             Logger.Trace("Input file: "+ inputFile);
             Logger.Trace("Output Directory: " + outputDirectory);
-            new MainForm(inputFile, outputDirectory); // Run program ***MainForm needs to be renamed
+            new MainForm(inputFile, outputDirectory, Method, AC, SC, SM, SR, DW, BG, SY, LO, MU, DO); // Run program ***MainForm needs to be renamed
             Logger.Trace("TF-IDF: " + MainForm.lblTDF_Text); // Output the TF-IDF
+
+            // method to print a logger message every time the message changes *** not tested yet, should work on LSA
+            string oldLoggerMessage = MainForm.LoggerMessage;
+            while (oldLoggerMessage != MainForm.LoggerMessage)
+            {
+                oldLoggerMessage = MainForm.LoggerMessage;
+                Logger.Trace(oldLoggerMessage);
+            }
+
+        }
+
+
+        // Function to take dropbox values, and return the resulting boolean
+        public bool get_bool(Boolean_type dropbox)
+        {
+            bool truth_val;
+            if (dropbox == Boolean_type.On) {
+                truth_val = true;
+            }
+            else {
+                truth_val = false;
+            }
+            return truth_val;
         }
     }
      
@@ -9210,7 +9251,7 @@ namespace FReQuAT_compiled_component
         /* PAY ATTENTION TO TFIDF Cut-off at 0.x SIM for writing cossim file!!!!!*/
 
         //***** added by jen *****
-        int cbMethod_SelectedIndex = 0;
+        Method_type selectedMethod; 
         int cbType_SelectedIndex = 0;
         string lbFile_Text;
         DataTable bsFeatures_DataSource;
@@ -9221,23 +9262,40 @@ namespace FReQuAT_compiled_component
         string lblTerms_Text;
         DataTable dgFeatures_DataSource;
         DataTable dgComments_DataSource;
-        // ***** keeping as defaults for now *****
-        bool SM = true;
-        bool SR = false;
-        bool DW = true;
-        bool BG = false;
-        bool SY = true;
-        bool LO = true;
-        bool SC = true;
-        bool MU = false;
-        bool DO = false;
-        bool AC = true;
 
-        public MainForm(string inputFile, string outputFile)
+        /* ***** keeping as defaults for now *****
+         * *** Ugh i did this a weird way but I would really like all the public bools to go back here instead of being called all the time
+         * maybe with a set_bools() function */
+        bool AC;
+        bool SC;
+        bool SM;
+        bool SR;
+        bool DW;
+        bool BG;
+        bool SY;
+        bool LO;
+        bool MU;
+        bool DO;
+
+        public static string LoggerMessage; // string so that if it changes, message is sent to logger
+
+        public MainForm(string inputFile, string outputFile, Method_type Method, bool bAC, bool bSC, bool bSM, bool bSR, bool bDW, bool bBG, bool bSY, bool bLO, bool bMU, bool bDO)
         {
-            /////InitializeComponent();
+            // set global variables
             fileXML = inputFile; // assign the XML file to be worked with
             dirPath = outputFile; // set location for log file
+            selectedMethod = Method;
+            // global boolean variables
+            AC = bAC;
+            SC = bSC;
+            SM = bSM;
+            SR = bSR;
+            DW = bDW;
+            BG = bBG;
+            SY = bSY;
+            LO = bLO;
+            MU = bMU;
+            DO = bDO;
 
             //by default select "AllComments"
             ///// cbMethod.SelectedIndex = 0; 
@@ -9250,19 +9308,23 @@ namespace FReQuAT_compiled_component
             DateTime d = DateTime.Now;
             logfile = outputFile + '\\' + d.Year.ToString("D4") + d.Month.ToString("D2") + d.Day.ToString("D2") + "_" + d.Hour.ToString("D2") + d.Minute.ToString("D2") + d.Second.ToString("D2") + "_log.txt";
 
-            //Console.WriteLine("Do you want to calculate TFIDF? (y/n)"); // ***No longer needed***
-            //string usrInput = Console.ReadLine();
-
-            //
-
-            string usrInput = "y";
-            if (usrInput == "y")
+            // determine action based on the selected Method
+            if (Method == Method_type.TFIDF)
             {
+                // calculate the TFIDF using method TFIDF
                 calculateTFIDF();
             }
-
+            else if (Method == Method_type.TitleVsDescription)
+            {
+                calculateTitleVsDesctiption();
+            }
+            else if (Method == Method_type.LSA)
+            {
+                calculateLSA();
+            }
         }
-        /*
+
+        /* *** Button to fill grid in GUI, don't think we need ***
         private void btnFill_Click(object sender, EventArgs e)
         {
             InputXML(fileXML);
@@ -9272,188 +9334,179 @@ namespace FReQuAT_compiled_component
             bsComments_DataSource = dsFeatures.Tables["long_desc"];
         } */
 
-        /*
-    private void btnTest_Click(object sender, EventArgs e)
-    {
-        DateTime start = DateTime.Now;
-        Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " Start LSA");
-        InputXML(fileXML);
-        Utilities.LogMessageToFile(MainForm.logfile, " Feature requests processed: " + fc.featureList.Count.ToString());
-        ////StopWordsHandler swh = new StopWordsHandler(cbSY.Checked);
-        StopWordsHandler swh = new StopWordsHandler(true);
-        ////TFIDFMeasure tf = new TFIDFMeasure(fc, cbSM.Checked, cbSR.Checked, cbDW.Checked, cbBG.Checked, cbSY.Checked, cbLO.Checked, cbSC.Checked, cbMU.Checked, cbDO.Checked);
-        TFIDFMeasure tf = new TFIDFMeasure(fc, true, false, true, false, true, true, true, false, false);
-        Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " TFIDF matrix calculated");
-        /* //////
-        if (tbK.Text != "")
+
+        private void calculateLSA()
         {
-            LSA.MainLSA(fc, tf, Int32.Parse(tbK.Text));
-        }
-        else
-        {
+            DateTime start = DateTime.Now;
+            Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " Start LSA");
+            InputXML(fileXML);
+            Utilities.LogMessageToFile(MainForm.logfile, " Feature requests processed: " + fc.featureList.Count.ToString());
+            ////StopWordsHandler swh = new StopWordsHandler(cbSY.Checked);
+            StopWordsHandler swh = new StopWordsHandler(true);
+            ////TFIDFMeasure tf = new TFIDFMeasure(fc, cbSM.Checked, cbSR.Checked, cbDW.Checked, cbBG.Checked, cbSY.Checked, cbLO.Checked, cbSC.Checked, cbMU.Checked, cbDO.Checked);
+            TFIDFMeasure tf = new TFIDFMeasure(fc, true, false, true, false, true, true, true, false, false);
+            Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " TFIDF matrix calculated");
+
+            //tbK_Text is the text box next to LSA, i'm not sure what it does
+            // so for now lets act like it isn't there
+            /*
+            if (tbK_Text != "")
+            {
+                LSA.MainLSA(fc, tf, Int32.Parse(tbK_Text));
+            }
+            else
+            {
+                LSA.MainLSA(fc, tf, 0);
+            } */
             LSA.MainLSA(fc, tf, 0);
+
+            Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " LSA matrix calculated for k = " + tbK_Text);
+
+            //MessageBox.Show(LSA.GetSimilarity(0, 1).ToString());
+
+            string outputFile;
+            outputFile = dirPath + "\\LSA" + getFileEnding();
+            outputFile += ".csv";
+            System.IO.File.Delete(outputFile);
+            System.IO.StreamWriter sw = new System.IO.StreamWriter(outputFile, true);
+            sw.WriteLine("Title_i, ID_i, Doc_j, ID_j, Cosine Similarity");
+            for (int i = 0; i < fc.featureList.Count; i++)
+            {
+                Feature f1 = fc.featureList[i];
+                for (int j = i + 1; j < fc.featureList.Count; j++) // updated from j = 0 to imrove speed
+                {
+                    if (j != i) // *** don't think this if is necessary, keepng for now
+                    {
+                        float sim = LSA.GetSimilarity(i, j);
+                        if (sim > simCut) // if cosSim > 0.5
+                        {
+                            Feature f2 = fc.featureList[j];
+                            sw.WriteLine(i.ToString() + "," + f1.id + "," + j.ToString() + "," + f2.id + "," + sim.ToString());
+                        }
+                    }
+                }
+            }
+            sw.Close();
+            //DateTime end2 = DateTime.Now;
+            //duration = end2 - end;
+            //time = duration.Minutes * 60.0 + duration.Seconds + duration.Milliseconds / 1000.0;
+            //MessageBox.Show(String.Format("Total processing time {0:########.00} seconds", time));
+
+            //WORD VECTOR SIMILARITY FOR LSA
+            //outputFile = dirPath + "\\LSAterms" + getFileEnding();
+            //outputFile += ".csv";
+            //System.IO.File.Delete(outputFile);
+            //System.IO.StreamWriter sw = new System.IO.StreamWriter(outputFile, true);
+            //sw.WriteLine("termID_i;term_i;termID_j;term_j;Cosine Similarity");
+            //for (int i = 0; i < tf._terms.Count; i++)
+            //{
+            //    string term_i = tf._terms[i].ToString();
+
+            //    for (int j = i + 1; j < tf._terms.Count; j++)
+            //    {
+            //        float sim = LSA.GetWordSimilarity(i, j);
+            //        if (sim > 0.5)
+            //        {
+            //            string term_j = tf._terms[j].ToString();
+            //            sw.WriteLine(i.ToString() + ";" + term_i + ";" + j.ToString() + ";" + term_j + ";" + sim.ToString());
+            //        }
+            //    }
+            //}
+            //sw.Close();
+            //System.Diagnostics.Process.Start(outputFile);
+
+            outputFile = dirPath + "\\duplicatesLSA" + getFileEnding();
+            outputFile += ".csv";
+            System.IO.File.Delete(outputFile);
+            System.IO.StreamWriter sw2 = new System.IO.StreamWriter(outputFile);
+            sw2.WriteLine("feature_id; dup_id; rank; sim");
+
+            //voor 1 duplicate top 10/20 vinden
+            int cTotal = 0;
+            int cTen = 0;
+            int cTwenty = 0;
+            foreach (Feature f in fc.featureList)
+            {
+                if (f.duplicate_id != "" && f.duplicate_id != null)
+                {
+
+                    //simlist wordt lijst met alle similarities
+                    List<KeyValuePair<string, float>> simlist = new List<KeyValuePair<string, float>>();
+                    if (f.id == "319295" && f.duplicate_id == "341829")
+                    {
+                    }
+                    else
+                    {
+                        int v1 = getFeatureIndex(f.id);
+                        int d = getFeatureIndex(f.duplicate_id);
+                        if (v1 != -1 && d != -1)
+                        {
+                            cTotal++;
+                            foreach (Feature f2 in fc.featureList)
+                            {
+                                if (f.id != f2.id)
+                                {
+                                    int v2 = getFeatureIndex(f2.id);
+                                    if (v2 != -1)
+                                    {
+                                        float sim = LSA.GetSimilarity(v1, v2);
+                                        KeyValuePair<string, float> kvp = new KeyValuePair<string, float>(f2.id, sim);
+                                        simlist.Add(kvp);
+                                    }
+                                }
+                            }
+
+                            //sorteer op similarity
+                            simlist = simlist.OrderByDescending(x => x.Value).ToList();
+                            //vind ranking
+                            f.dupRank = 0;
+                            while (simlist.ElementAt(f.dupRank).Key != f.duplicate_id)
+                            {
+                                f.dupRank++;
+                            }
+                            f.dupSim = simlist.ElementAt(f.dupRank).Value;
+                            f.dupRank += 1;
+                            if (f.dupRank <= 10)
+                            {
+                                cTen++;
+                            }
+
+                            if (f.dupRank <= 20)
+                            {
+                                cTwenty++;
+                            }
+
+                            sw2.WriteLine(f.id + ";" + f.duplicate_id + ";" + f.dupRank + ";" + f.dupSim.ToString("F4"));
+                            Debug.WriteLine(DateTime.Now.ToShortTimeString() + " " + f.id + ";" + f.duplicate_id + ";" + f.dupRank + ";" + f.dupSim.ToString("F4"));
+                        }
+                    }
+                }
+            }
+            sw2.Close();
+            //System.Diagnostics.Process.Start(outputFile);
+
+            //calculate percentage in top 10 or top 20
+            if (cTotal > 0)
+            {
+                double pTen = (double)cTen / cTotal;
+                double pTwenty = (double)cTwenty / cTotal;
+                DateTime end = DateTime.Now;
+                TimeSpan duration = end - start;
+                double time = duration.Days * 24 * 3600.0 + duration.Hours * 3600.0 + duration.Minutes * 60.0 + duration.Seconds + duration.Milliseconds / 1000.0;
+                ////MessageBox.Show("top 10: " + pTen.ToString("F2") + "% out of " + cTotal + " \n top 20:" + pTwenty.ToString("F2") + "% out of " + cTotal);
+                ////MessageBox.Show(String.Format("Total processing time {0:########.00} seconds", time));
+                Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " top 10: " + pTen.ToString("F2") + "% out of " + cTotal + " \n top 20:" + pTwenty.ToString("F2") + "% out of " + cTotal);
+                Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + String.Format(" Total processing time {0:########.00} seconds", time));
+
+            }
+            else
+            {
+                ////MessageBox.Show("No valid duplicates found");
+                Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " No valid duplicates found");
+            }
         }
-        */ /////
-           /*
-           Console.WriteLine("Enter tbK: ");
-           tbK_Text = Console.ReadLine();
-           if (tbK_Text != "")
-           {
-               LSA.MainLSA(fc, tf, Int32.Parse(tbK_Text));
-           }
-           else
-           {
-               LSA.MainLSA(fc, tf, 0);
-           }
 
-           ///// Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " LSA matrix calculated for k = " + tbK.Text);
-           Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " LSA matrix calculated for k = " + tbK_Text);
-
-           //MessageBox.Show(LSA.GetSimilarity(0, 1).ToString());
-
-           string outputFile;
-           outputFile = dirPath + "\\LSA" + getFileEnding();
-           outputFile += ".csv";
-           System.IO.File.Delete(outputFile);
-           System.IO.StreamWriter sw = new System.IO.StreamWriter(outputFile, true);
-           sw.WriteLine("Title_i;ID_i;Doc_j;ID_j;Cosine Similarity");
-           for (int i = 0; i < fc.featureList.Count; i++)
-           {
-               Feature f1 = fc.featureList[i];
-               for (int j = 0; j < fc.featureList.Count; j++)
-               {
-                   if (j != i)
-                   {
-                       float sim = LSA.GetSimilarity(i, j);
-                       if (sim > simCut)
-                       {
-                           Feature f2 = fc.featureList[j];
-                           sw.WriteLine(i.ToString() + ";" + f1.id + ";" + j.ToString() + ";" + f2.id + ";" + sim.ToString());
-                       }
-                   }
-               }
-           }
-           sw.Close();
-           //DateTime end2 = DateTime.Now;
-           //duration = end2 - end;
-           //time = duration.Minutes * 60.0 + duration.Seconds + duration.Milliseconds / 1000.0;
-           //MessageBox.Show(String.Format("Total processing time {0:########.00} seconds", time));
-
-           //WORD VECTOR SIMILARITY FOR LSA
-           //outputFile = dirPath + "\\LSAterms" + getFileEnding();
-           //outputFile += ".csv";
-           //System.IO.File.Delete(outputFile);
-           //System.IO.StreamWriter sw = new System.IO.StreamWriter(outputFile, true);
-           //sw.WriteLine("termID_i;term_i;termID_j;term_j;Cosine Similarity");
-           //for (int i = 0; i < tf._terms.Count; i++)
-           //{
-           //    string term_i = tf._terms[i].ToString();
-
-           //    for (int j = i + 1; j < tf._terms.Count; j++)
-           //    {
-           //        float sim = LSA.GetWordSimilarity(i, j);
-           //        if (sim > 0.5)
-           //        {
-           //            string term_j = tf._terms[j].ToString();
-           //            sw.WriteLine(i.ToString() + ";" + term_i + ";" + j.ToString() + ";" + term_j + ";" + sim.ToString());
-           //        }
-           //    }
-           //}
-           //sw.Close();
-           //System.Diagnostics.Process.Start(outputFile);
-
-           outputFile = dirPath + "\\duplicatesLSA" + getFileEnding();
-           outputFile += ".csv";
-           System.IO.File.Delete(outputFile);
-           System.IO.StreamWriter sw2 = new System.IO.StreamWriter(outputFile);
-           sw2.WriteLine("feature_id; dup_id; rank; sim");
-
-           //voor 1 duplicate top 10/20 vinden
-           int cTotal = 0;
-           int cTen = 0;
-           int cTwenty = 0;
-           foreach (Feature f in fc.featureList)
-           {
-               if (f.duplicate_id != "" && f.duplicate_id != null)
-               {
-
-                   //simlist wordt lijst met alle similarities
-                   List<KeyValuePair<string, float>> simlist = new List<KeyValuePair<string, float>>();
-                   if (f.id == "319295" && f.duplicate_id == "341829")
-                   {
-                   }
-                   else
-                   {
-                       int v1 = getFeatureIndex(f.id);
-                       int d = getFeatureIndex(f.duplicate_id);
-                       if (v1 != -1 && d != -1)
-                       {
-                           cTotal++;
-                           foreach (Feature f2 in fc.featureList)
-                           {
-                               if (f.id != f2.id)
-                               {
-                                   int v2 = getFeatureIndex(f2.id);
-                                   if (v2 != -1)
-                                   {
-                                       float sim = LSA.GetSimilarity(v1, v2);
-                                       KeyValuePair<string, float> kvp = new KeyValuePair<string, float>(f2.id, sim);
-                                       simlist.Add(kvp);
-                                   }
-                               }
-                           }
-
-                           //sorteer op similarity
-                           simlist = simlist.OrderByDescending(x => x.Value).ToList();
-                           //vind ranking
-                           f.dupRank = 0;
-                           while (simlist.ElementAt(f.dupRank).Key != f.duplicate_id)
-                           {
-                               f.dupRank++;
-                           }
-                           f.dupSim = simlist.ElementAt(f.dupRank).Value;
-                           f.dupRank += 1;
-                           if (f.dupRank <= 10)
-                           {
-                               cTen++;
-                           }
-
-                           if (f.dupRank <= 20)
-                           {
-                               cTwenty++;
-                           }
-
-                           sw2.WriteLine(f.id + ";" + f.duplicate_id + ";" + f.dupRank + ";" + f.dupSim.ToString("F4"));
-                           Debug.WriteLine(DateTime.Now.ToShortTimeString() + " " + f.id + ";" + f.duplicate_id + ";" + f.dupRank + ";" + f.dupSim.ToString("F4"));
-                       }
-                   }
-               }
-           }
-           sw2.Close();
-           //System.Diagnostics.Process.Start(outputFile);
-
-           //calculate percentage in top 10 or top 20
-           if (cTotal > 0)
-           {
-               double pTen = (double)cTen / cTotal;
-               double pTwenty = (double)cTwenty / cTotal;
-               DateTime end = DateTime.Now;
-               TimeSpan duration = end - start;
-               double time = duration.Days * 24 * 3600.0 + duration.Hours * 3600.0 + duration.Minutes * 60.0 + duration.Seconds + duration.Milliseconds / 1000.0;
-               ////MessageBox.Show("top 10: " + pTen.ToString("F2") + "% out of " + cTotal + " \n top 20:" + pTwenty.ToString("F2") + "% out of " + cTotal);
-               ////MessageBox.Show(String.Format("Total processing time {0:########.00} seconds", time));
-               Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " top 10: " + pTen.ToString("F2") + "% out of " + cTotal + " \n top 20:" + pTwenty.ToString("F2") + "% out of " + cTotal);
-               Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + String.Format(" Total processing time {0:########.00} seconds", time));
-
-           }
-           else
-           {
-               ////MessageBox.Show("No valid duplicates found");
-               Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " No valid duplicates found");
-           }
-       }
        /*
-
        //private void btnTest_Click(object sender, EventArgs e)
        //{
        //    DateTime start = DateTime.Now;
@@ -9671,7 +9724,7 @@ namespace FReQuAT_compiled_component
             //processXML();
             InputXML(fileXML);
             StopWordsHandler stopword = new StopWordsHandler(SY);
-            if (cbMethod_SelectedIndex == 0) /* default */
+            if (true) /* default */
             {
                 tf = new TFIDFMeasure(fc, SM, SR, DW, BG, SY, LO, SC, MU, DO);
                 Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " End TF-IDF");
@@ -9713,6 +9766,7 @@ namespace FReQuAT_compiled_component
                 ///// btnSave.Enabled = true;
                 ///// btnTerms.Enabled = true;
             }
+            /* added to different function 
             else
             {
                 string outputFile = dirPath + "\\cossim" + getFileEnding();
@@ -9743,6 +9797,42 @@ namespace FReQuAT_compiled_component
                 }
                 sw.Close();
             }
+            */
+        }
+
+        private void calculateTitleVsDesctiption()
+        {
+            Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " Start TF-IDF");
+            //processXML();
+            InputXML(fileXML);
+            StopWordsHandler stopword = new StopWordsHandler(SY);
+            string outputFile = dirPath + "\\cossim" + getFileEnding();
+            outputFile += "_xref.csv";
+            System.IO.File.Delete(outputFile);
+            System.IO.StreamWriter sw = new System.IO.StreamWriter(outputFile, true);
+            sw.WriteLine("Title_i, ID_i, Doc_j, ID_j, Cosine Similarity"); // updated deliminators to be commas instead of semi-colens
+            for (int i = 0; i < fc.featureList.Count; i++)
+            {
+                Feature f1 = fc.featureList[i];
+                //if (f1.id == "224119" || f1.id == "238186" || f1.id == "343755" || f1.id == "344748" ||
+                //   f1.id == "353263" || f1.id == "363984" || f1.id == "364870" || f1.id == "376807" ||
+                //   f1.id == "378528" || f1.id == "394920")
+                //{
+
+                tf = new TFIDFMeasure(fc, i, SM, SR, DW, BG, SY, LO, SC, MU, DO);
+                for (int j = i + 1; j < fc.featureList.Count; j++) // updated from j = 0 to improve speed
+                {
+                    if (j !=i ) // *** pretty sure this if can be removed, just don't want to mess with for now
+                    {
+                        Feature f2 = fc.featureList[j];
+                        sw.WriteLine(i.ToString() + "," + f1.id + "," + j.ToString() + "," + f2.id + "," + tf.GetSimilarity(i, j).ToString());
+                    }
+                }
+                lblTDF_Text = i.ToString() + "done!";
+                ///// lblTDF.Refresh();
+                //}
+            }
+            sw.Close();
         }
 
         /*
@@ -9826,26 +9916,66 @@ namespace FReQuAT_compiled_component
         }
         */
 
+        // function to assign name to csv files
         private string getFileEnding()
         {
             string strEnd = "";
-            /*
-            if (cbMethod_SelectedIndex != 0)
+            
+            // add type to end
+            if (selectedMethod == Method_type.TitleVsDescription)
             {
-                strEnd += "_M" + cbMethod.Text[0];
+                strEnd += "_TvsD";
             }
-            foreach (Control cb in this.Controls)
+            else if (selectedMethod == Method_type.LSA)
             {
-                if (cb.GetType() == typeof(CheckBox))
-                {
-                    if (((CheckBox)cb).Checked)
-                    {
-                        strEnd += "_" + cb.Text.Substring(0, 2);
-                    }
-                }
-            } */
+                strEnd += "_LSA";
+            }
+            else // ***** temp if statement to prevent errors *****
+            {
+                strEnd += "_ifyouseethissomethingiswrong";
+            }
 
-            strEnd = "_defaultfornow";
+            // add boolean values to end
+            if (AC)
+            {
+                strEnd += "_AC";
+            }
+            if (SC)
+            {
+                strEnd += "_SC";
+            }
+            if (SM)
+            {
+                strEnd += "_SM";
+            }
+            if (SR)
+            {
+                strEnd += "_SR";
+            }
+            if (DW)
+            {
+                strEnd += "_DW";
+            }
+            if (BG)
+            {
+                strEnd += "_BG";
+            }
+            if (SY)
+            {
+                strEnd += "_SY";
+            }
+            if (LO)
+            {
+                strEnd += "_LO";
+            }
+            if (MU)
+            {
+                strEnd += "_MU";
+            }
+            if (DO)
+            {
+                strEnd += "_DO";
+            }
             return strEnd;
         }
 

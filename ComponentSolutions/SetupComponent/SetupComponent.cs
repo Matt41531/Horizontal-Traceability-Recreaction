@@ -53,10 +53,12 @@ namespace ComponentSolutions
             var outputDirectory = this.Configuration.OutputDirectory.Absolute;
             string strCmdText;
             string strStartingText = "/C ";
+            string[] directories = inputFile.Split();
             strCmdText = "/C ipconfig/all";
             System.Diagnostics.Process.Start("CMD.exe", (strStartingText + inputFile));
             //DEBUGGING prints        
             Logger.Trace(inputFile);
+            Logger.Trace(directories);
             Logger.Trace("Worked");
             
             //Workspace.Store("outputName", 5);

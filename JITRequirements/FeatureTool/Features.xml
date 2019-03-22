@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feature>
+  <ID>123456</ID>
+  <created>2006-01-23</created>
+  <modified>2006-08-12</modified>
+  <title>DSO support for mod_rewrite</title>
+  <reporter>jacob.rief</reporter>
+  <product name="Apache HTTPD">
+    <component name="HTTP">
+      <component>
+        mod_rewrite
+      </component>
+    </component>
+  </product>
+  <version>1.2.0</version>
+  <environment>All</environment>
+  <status>Resolved</status>
+  <resolution>Duplicate</resolution>
+  <URL>http://www.nu.nl</URL>
+  <labels>
+    <label>test</label>
+    <label>hallo</label>
+    <label>welkom</label>
+  </labels>
+  <priority>P1</priority>
+  <targetDate>2006-07-31</targetDate>
+  <assignee>karl.lewis</assignee>
+  <votes>0</votes>
+  <links>
+    <link>
+      <linkType>DUPLICATE</linkType>
+      <linkedID>123890</linkedID>
+      <linkComment>Dit is dezelfde vraag</linkComment>
+    </link>
+  </links>
+  <comments>
+    <comment>
+      <cID>84885</cID>
+      <cReporter>paul.kamp</cReporter>
+      <cCreated>2006-01-25</cCreated>
+      <cText>Dit is leuk</cText>
+    </comment>
+    <comment>Waarom gaan we hier niet mee verder</comment>
+    <comment>Je had een stem moeten uitbrengen</comment>
+  </comments>
+</feature>

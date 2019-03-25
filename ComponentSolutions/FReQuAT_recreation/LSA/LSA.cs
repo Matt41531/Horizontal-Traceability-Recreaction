@@ -21,8 +21,8 @@ using TraceLabSDK;
 namespace LSA
 {
     [Component(Name = "LSA",
-                Description = "---",
-                Author = "---",
+                Description = "Component to calculate the LSA of a feature request file",
+                Author = "Jen Lee at University of Kentucky: Based on contributions from Dr. Petra Heck and Dr. Andy Zaidman",
                 Version = "1.0",
                 ConfigurationType = typeof(LSA_configuration))]
 

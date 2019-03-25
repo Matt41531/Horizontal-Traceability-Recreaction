@@ -8,8 +8,8 @@ namespace TFIDF
 {
 
     [Component(Name = "TFIDF",
-                Description = "*Insert*",
-                Author = "*Insert*",
+                Description = "Component to calculate the TFIDF of feature requests",
+                Author = "Jen Lee at University of Kentucky: Based on contributions from Dr. Petra Heck and Dr. Andy Zaidman",
                 Version = "1.0",
                 ConfigurationType = typeof(TFIDF_configuration)
         )]

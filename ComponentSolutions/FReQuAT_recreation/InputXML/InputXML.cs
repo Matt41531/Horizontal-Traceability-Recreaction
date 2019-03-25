@@ -7,8 +7,8 @@ using TraceLabSDK;
 namespace InputXML
 {
     [Component(Name = "Input XML",
-                Description = "Component to input feature request file and process the XML by tokenization",
-                Author = "Jen Lee & Matthew Rife: Based on contributions from Dr. Petra Heck and ***(Dr.?)*** Andy Zaidman",
+                Description = "Component to input feature request file",
+                Author = "Jen Lee & Matthew Rife at University of Kentucky: Based on contributions from Dr. Petra Heck and Dr. Andy Zaidman",
                 Version = "1.0",
                 ConfigurationType = typeof(InputXML_configuration)
         )]

@@ -1,0 +1,446 @@
+﻿<graph>
+  <References />
+  <ExperimentInfo>
+    <Version>2</Version>
+    <Id>a666f214-ef1b-4c10-a256-6367bcdac83f</Id>
+    <Name>RecreationExperiment-temp</Name>
+    <LayoutName>EfficientSugiyama</LayoutName>
+  </ExperimentInfo>
+  <node id="Start">
+    <SerializedVertexData Version="1" X="282.668" Y="38.664">
+      <Metadata type="TraceLab.Core.Components.StartNodeMetadata, TraceLab.Core, Culture=neutral, PublicKeyToken=2c83cea59a8bb151" Label="Start" />
+    </SerializedVertexData>
+  </node>
+  <node id="End">
+    <SerializedVertexData Version="1" X="282.672" Y="234.678">
+      <Metadata type="TraceLab.Core.Components.EndNodeMetadata, TraceLab.Core, Culture=neutral, PublicKeyToken=2c83cea59a8bb151" Label="End" WaitsForAllPredecessors="True" />
+    </SerializedVertexData>
+  </node>
+  <node id="4e8c8e35-5dd4-4a63-90ff-6c1138450a86">
+    <SerializedVertexData Version="1" X="284.003" Y="104.001">
+      <Metadata type="TraceLab.Core.Components.ComponentMetadata, TraceLab.Core, Culture=neutral, PublicKeyToken=2c83cea59a8bb151" Label="Input XML" ComponentMetadataDefinitionID="6dd9816c-97ab-5c90-b101-d36a6f0abe9d" WaitsForAllPredecessors="True">
+        <IOSpec Version="2">
+          <Input />
+          <Output>
+            <IOItem>
+              <IOItemDefinition Name="outputDirectory" Type="System.String" IOType="Output" />
+              <MappedTo>outputDirectory</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="inputFile" Type="System.String" IOType="Output" />
+              <MappedTo>inputFile</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="AC" Type="System.Boolean" IOType="Output" />
+              <MappedTo>AC</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="SC" Type="System.Boolean" IOType="Output" />
+              <MappedTo>SC</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="SM" Type="System.Boolean" IOType="Output" />
+              <MappedTo>SM</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="SR" Type="System.Boolean" IOType="Output" />
+              <MappedTo>SR</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="DW" Type="System.Boolean" IOType="Output" />
+              <MappedTo>DW</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="BG" Type="System.Boolean" IOType="Output" />
+              <MappedTo>BG</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="SY" Type="System.Boolean" IOType="Output" />
+              <MappedTo>SY</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="LO" Type="System.Boolean" IOType="Output" />
+              <MappedTo>LO</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="MU" Type="System.Boolean" IOType="Output" />
+              <MappedTo>MU</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="DO" Type="System.Boolean" IOType="Output" />
+              <MappedTo>DO</MappedTo>
+            </IOItem>
+          </Output>
+        </IOSpec>
+        <ConfigWrapper Version="1" IsJava="False">
+          <ConfigValues>
+            <PropertyObject>
+              <Version>3</Version>
+              <Name>XML</Name>
+              <DisplayName>XML location</DisplayName>
+              <Description>Location of log file.xml</Description>
+              <ValueType>TraceLabSDK.Component.Config.FilePath, TraceLabSDK, Culture=neutral, PublicKeyToken=2c83cea59a8bb151</ValueType>
+              <Visible>True</Visible>
+              <IsEnum>False</IsEnum>
+              <Value IsNull="True" />
+            </PropertyObject>
+            <PropertyObject>
+              <Version>3</Version>
+              <Name>OutputDirectory</Name>
+              <DisplayName>Output Directory</DisplayName>
+              <Description>Directory for output files</Description>
+              <ValueType>TraceLabSDK.Component.Config.DirectoryPath, TraceLabSDK, Culture=neutral, PublicKeyToken=2c83cea59a8bb151</ValueType>
+              <Visible>True</Visible>
+              <IsEnum>False</IsEnum>
+              <Value IsNull="True" />
+            </PropertyObject>
+            <PropertyObject>
+              <Version>3</Version>
+              <Name>AC</Name>
+              <DisplayName>AC: All Comments</DisplayName>
+              <Description>Set AC: All Comments format as 'True', or 'False'</Description>
+              <ActualValueType>TraceLab.Core.Components.EnumValueCollection, TraceLab.Core, Culture=neutral, PublicKeyToken=2c83cea59a8bb151</ActualValueType>
+              <ValueType>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ValueType>
+              <Visible>True</Visible>
+              <IsEnum>True</IsEnum>
+              <EnumInfo>
+                <EnumValueCollection>
+                  <SourceEnum>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</SourceEnum>
+                  <Value>On</Value>
+                  <PossibleValues>
+                    <ArrayOfEnumValue xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                      <EnumValue>
+                        <Value>On</Value>
+                      </EnumValue>
+                      <EnumValue>
+                        <Value>Off</Value>
+                      </EnumValue>
+                    </ArrayOfEnumValue>
+                  </PossibleValues>
+                </EnumValueCollection>
+              </EnumInfo>
+            </PropertyObject>
+            <PropertyObject>
+              <Version>3</Version>
+              <Name>SC</Name>
+              <DisplayName>SC: Source code removal</DisplayName>
+              <Description>Set SC: Cource code removal format as 'True', or 'False'</Description>
+              <ActualValueType>TraceLab.Core.Components.EnumValueCollection, TraceLab.Core, Culture=neutral, PublicKeyToken=2c83cea59a8bb151</ActualValueType>
+              <ValueType>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ValueType>
+              <Visible>True</Visible>
+              <IsEnum>True</IsEnum>
+              <EnumInfo>
+                <EnumValueCollection>
+                  <SourceEnum>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</SourceEnum>
+                  <Value>On</Value>
+                  <PossibleValues>
+                    <ArrayOfEnumValue xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                      <EnumValue>
+                        <Value>On</Value>
+                      </EnumValue>
+                      <EnumValue>
+                        <Value>Off</Value>
+                      </EnumValue>
+                    </ArrayOfEnumValue>
+                  </PossibleValues>
+                </EnumValueCollection>
+              </EnumInfo>
+            </PropertyObject>
+            <PropertyObject>
+              <Version>3</Version>
+              <Name>SM</Name>
+              <DisplayName>SM: Stremming</DisplayName>
+              <Description>Set SM: Stremming format as 'True', or 'False'</Description>
+              <ActualValueType>TraceLab.Core.Components.EnumValueCollection, TraceLab.Core, Culture=neutral, PublicKeyToken=2c83cea59a8bb151</ActualValueType>
+              <ValueType>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ValueType>
+              <Visible>True</Visible>
+              <IsEnum>True</IsEnum>
+              <EnumInfo>
+                <EnumValueCollection>
+                  <SourceEnum>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</SourceEnum>
+                  <Value>On</Value>
+                  <PossibleValues>
+                    <ArrayOfEnumValue xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                      <EnumValue>
+                        <Value>On</Value>
+                      </EnumValue>
+                      <EnumValue>
+                        <Value>Off</Value>
+                      </EnumValue>
+                    </ArrayOfEnumValue>
+                  </PossibleValues>
+                </EnumValueCollection>
+              </EnumInfo>
+            </PropertyObject>
+            <PropertyObject>
+              <Version>3</Version>
+              <Name>SR</Name>
+              <DisplayName>SR: Stop word removal</DisplayName>
+              <Description>Set SR: Stop word removal format as 'True', or 'False'</Description>
+              <ActualValueType>TraceLab.Core.Components.EnumValueCollection, TraceLab.Core, Culture=neutral, PublicKeyToken=2c83cea59a8bb151</ActualValueType>
+              <ValueType>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ValueType>
+              <Visible>True</Visible>
+              <IsEnum>True</IsEnum>
+              <EnumInfo>
+                <EnumValueCollection>
+                  <SourceEnum>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</SourceEnum>
+                  <Value>On</Value>
+                  <PossibleValues>
+                    <ArrayOfEnumValue xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                      <EnumValue>
+                        <Value>On</Value>
+                      </EnumValue>
+                      <EnumValue>
+                        <Value>Off</Value>
+                      </EnumValue>
+                    </ArrayOfEnumValue>
+                  </PossibleValues>
+                </EnumValueCollection>
+              </EnumInfo>
+            </PropertyObject>
+            <PropertyObject>
+              <Version>3</Version>
+              <Name>DW</Name>
+              <DisplayName>DW: Double weight title</DisplayName>
+              <Description>Set DW: Double weight title format as 'True', or 'False'</Description>
+              <ActualValueType>TraceLab.Core.Components.EnumValueCollection, TraceLab.Core, Culture=neutral, PublicKeyToken=2c83cea59a8bb151</ActualValueType>
+              <ValueType>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ValueType>
+              <Visible>True</Visible>
+              <IsEnum>True</IsEnum>
+              <EnumInfo>
+                <EnumValueCollection>
+                  <SourceEnum>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</SourceEnum>
+                  <Value>On</Value>
+                  <PossibleValues>
+                    <ArrayOfEnumValue xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                      <EnumValue>
+                        <Value>On</Value>
+                      </EnumValue>
+                      <EnumValue>
+                        <Value>Off</Value>
+                      </EnumValue>
+                    </ArrayOfEnumValue>
+                  </PossibleValues>
+                </EnumValueCollection>
+              </EnumInfo>
+            </PropertyObject>
+            <PropertyObject>
+              <Version>3</Version>
+              <Name>BG</Name>
+              <DisplayName>BG: Bi-gram</DisplayName>
+              <Description>Set BG: Bi-gram format as 'True', or 'False'</Description>
+              <ActualValueType>TraceLab.Core.Components.EnumValueCollection, TraceLab.Core, Culture=neutral, PublicKeyToken=2c83cea59a8bb151</ActualValueType>
+              <ValueType>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ValueType>
+              <Visible>True</Visible>
+              <IsEnum>True</IsEnum>
+              <EnumInfo>
+                <EnumValueCollection>
+                  <SourceEnum>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</SourceEnum>
+                  <Value>On</Value>
+                  <PossibleValues>
+                    <ArrayOfEnumValue xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                      <EnumValue>
+                        <Value>On</Value>
+                      </EnumValue>
+                      <EnumValue>
+                        <Value>Off</Value>
+                      </EnumValue>
+                    </ArrayOfEnumValue>
+                  </PossibleValues>
+                </EnumValueCollection>
+              </EnumInfo>
+            </PropertyObject>
+            <PropertyObject>
+              <Version>3</Version>
+              <Name>SY</Name>
+              <DisplayName>SY: Remove synonyms, spelling mistakes</DisplayName>
+              <Description>Set SY: Remove synonyms, spelling mistakes format as 'True', or 'False'</Description>
+              <ActualValueType>TraceLab.Core.Components.EnumValueCollection, TraceLab.Core, Culture=neutral, PublicKeyToken=2c83cea59a8bb151</ActualValueType>
+              <ValueType>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ValueType>
+              <Visible>True</Visible>
+              <IsEnum>True</IsEnum>
+              <EnumInfo>
+                <EnumValueCollection>
+                  <SourceEnum>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</SourceEnum>
+                  <Value>On</Value>
+                  <PossibleValues>
+                    <ArrayOfEnumValue xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                      <EnumValue>
+                        <Value>On</Value>
+                      </EnumValue>
+                      <EnumValue>
+                        <Value>Off</Value>
+                      </EnumValue>
+                    </ArrayOfEnumValue>
+                  </PossibleValues>
+                </EnumValueCollection>
+              </EnumInfo>
+            </PropertyObject>
+            <PropertyObject>
+              <Version>3</Version>
+              <Name>LO</Name>
+              <DisplayName>LO: toLower</DisplayName>
+              <Description>Set LO: toLoweer format as 'True', or 'False'</Description>
+              <ActualValueType>TraceLab.Core.Components.EnumValueCollection, TraceLab.Core, Culture=neutral, PublicKeyToken=2c83cea59a8bb151</ActualValueType>
+              <ValueType>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ValueType>
+              <Visible>True</Visible>
+              <IsEnum>True</IsEnum>
+              <EnumInfo>
+                <EnumValueCollection>
+                  <SourceEnum>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</SourceEnum>
+                  <Value>On</Value>
+                  <PossibleValues>
+                    <ArrayOfEnumValue xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                      <EnumValue>
+                        <Value>On</Value>
+                      </EnumValue>
+                      <EnumValue>
+                        <Value>Off</Value>
+                      </EnumValue>
+                    </ArrayOfEnumValue>
+                  </PossibleValues>
+                </EnumValueCollection>
+              </EnumInfo>
+            </PropertyObject>
+            <PropertyObject>
+              <Version>3</Version>
+              <Name>MU</Name>
+              <DisplayName>MU: Remove words with count 1</DisplayName>
+              <Description>Set MU: Remove words with count 1 as 'True', or 'False'</Description>
+              <ActualValueType>TraceLab.Core.Components.EnumValueCollection, TraceLab.Core, Culture=neutral, PublicKeyToken=2c83cea59a8bb151</ActualValueType>
+              <ValueType>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ValueType>
+              <Visible>True</Visible>
+              <IsEnum>True</IsEnum>
+              <EnumInfo>
+                <EnumValueCollection>
+                  <SourceEnum>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</SourceEnum>
+                  <Value>On</Value>
+                  <PossibleValues>
+                    <ArrayOfEnumValue xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                      <EnumValue>
+                        <Value>On</Value>
+                      </EnumValue>
+                      <EnumValue>
+                        <Value>Off</Value>
+                      </EnumValue>
+                    </ArrayOfEnumValue>
+                  </PossibleValues>
+                </EnumValueCollection>
+              </EnumInfo>
+            </PropertyObject>
+            <PropertyObject>
+              <Version>3</Version>
+              <Name>DO</Name>
+              <DisplayName>DO: Remove words with only 1 document</DisplayName>
+              <Description>Set DO: Remove words with only 1 document format as 'True', or 'False'</Description>
+              <ActualValueType>TraceLab.Core.Components.EnumValueCollection, TraceLab.Core, Culture=neutral, PublicKeyToken=2c83cea59a8bb151</ActualValueType>
+              <ValueType>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ValueType>
+              <Visible>True</Visible>
+              <IsEnum>True</IsEnum>
+              <EnumInfo>
+                <EnumValueCollection>
+                  <SourceEnum>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</SourceEnum>
+                  <Value>On</Value>
+                  <PossibleValues>
+                    <ArrayOfEnumValue xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                      <EnumValue>
+                        <Value>On</Value>
+                      </EnumValue>
+                      <EnumValue>
+                        <Value>Off</Value>
+                      </EnumValue>
+                    </ArrayOfEnumValue>
+                  </PossibleValues>
+                </EnumValueCollection>
+              </EnumInfo>
+            </PropertyObject>
+          </ConfigValues>
+        </ConfigWrapper>
+      </Metadata>
+    </SerializedVertexData>
+  </node>
+  <node id="84fa4bc7-4826-438a-ac6a-3794e37bc89d">
+    <SerializedVertexData Version="1" X="282.671" Y="166">
+      <Metadata type="TraceLab.Core.Components.ComponentMetadata, TraceLab.Core, Culture=neutral, PublicKeyToken=2c83cea59a8bb151" Label="LSA" ComponentMetadataDefinitionID="27127388-63a9-5e21-bec3-608a07b9cc2f" WaitsForAllPredecessors="True">
+        <IOSpec Version="2">
+          <Input>
+            <IOItem>
+              <IOItemDefinition Name="inputFile" Type="System.String" IOType="Input" />
+              <MappedTo>inputFile</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="outputDirectory" Type="System.String" IOType="Input" />
+              <MappedTo>outputDirectory</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="AC" Type="System.Boolean" IOType="Input" />
+              <MappedTo>AC</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="SC" Type="System.Boolean" IOType="Input" />
+              <MappedTo>SC</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="SM" Type="System.Boolean" IOType="Input" />
+              <MappedTo>SM</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="SR" Type="System.Boolean" IOType="Input" />
+              <MappedTo>SR</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="DW" Type="System.Boolean" IOType="Input" />
+              <MappedTo>DW</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="BG" Type="System.Boolean" IOType="Input" />
+              <MappedTo>BG</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="SY" Type="System.Boolean" IOType="Input" />
+              <MappedTo>SY</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="LO" Type="System.Boolean" IOType="Input" />
+              <MappedTo>LO</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="MU" Type="System.Boolean" IOType="Input" />
+              <MappedTo>MU</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="DO" Type="System.Boolean" IOType="Input" />
+              <MappedTo>DO</MappedTo>
+            </IOItem>
+          </Input>
+          <Output />
+        </IOSpec>
+        <ConfigWrapper Version="1" IsJava="False">
+          <ConfigValues>
+            <PropertyObject>
+              <Version>3</Version>
+              <Name>k</Name>
+              <DisplayName>k = </DisplayName>
+              <Description />
+              <ValueType>System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</ValueType>
+              <Visible>True</Visible>
+              <IsEnum>False</IsEnum>
+              <Value IsNull="False">
+                <string />
+              </Value>
+            </PropertyObject>
+          </ConfigValues>
+        </ConfigWrapper>
+      </Metadata>
+    </SerializedVertexData>
+  </node>
+  <edge id="42d49190-d069-4844-b665-9024f3c26489" source="Start" target="4e8c8e35-5dd4-4a63-90ff-6c1138450a86" isFixed="False" isVisible="True">
+    <RoutePointsCollection />
+  </edge>
+  <edge id="f548490b-2dbc-45d6-8fe4-080e04faa7dd" source="4e8c8e35-5dd4-4a63-90ff-6c1138450a86" target="84fa4bc7-4826-438a-ac6a-3794e37bc89d" isFixed="False" isVisible="True">
+    <RoutePointsCollection />
+  </edge>
+  <edge id="8665ca6c-6336-478e-b9ee-417336573e92" source="84fa4bc7-4826-438a-ac6a-3794e37bc89d" target="End" isFixed="False" isVisible="True">
+    <RoutePointsCollection />
+  </edge>
+</graph>

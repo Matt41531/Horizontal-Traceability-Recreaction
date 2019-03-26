@@ -82,7 +82,12 @@
               <ValueType>TraceLabSDK.Component.Config.FilePath, TraceLabSDK, Culture=neutral, PublicKeyToken=2c83cea59a8bb151</ValueType>
               <Visible>True</Visible>
               <IsEnum>False</IsEnum>
-              <Value IsNull="True" />
+              <Value IsNull="False">
+                <FilePath>
+                  <Version>2</Version>
+                  <Relative>..\ComponentSolutions\FReQuAT_recreation\Datasets\Mylyn\20130408_mylyntasks.xml</Relative>
+                </FilePath>
+              </Value>
             </PropertyObject>
             <PropertyObject>
               <Version>3</Version>
@@ -92,7 +97,12 @@
               <ValueType>TraceLabSDK.Component.Config.DirectoryPath, TraceLabSDK, Culture=neutral, PublicKeyToken=2c83cea59a8bb151</ValueType>
               <Visible>True</Visible>
               <IsEnum>False</IsEnum>
-              <Value IsNull="True" />
+              <Value IsNull="False">
+                <DirectoryPath>
+                  <Version>1</Version>
+                  <Relative>..\ComponentSolutions\FReQuAT_recreation\Datasets\Mylyn\AC_SC_SM_DW_SY_LO</Relative>
+                </DirectoryPath>
+              </Value>
             </PropertyObject>
             <PropertyObject>
               <Version>3</Version>
@@ -184,7 +194,7 @@
               <EnumInfo>
                 <EnumValueCollection>
                   <SourceEnum>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</SourceEnum>
-                  <Value>On</Value>
+                  <Value>Off</Value>
                   <PossibleValues>
                     <ArrayOfEnumValue xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                       <EnumValue>
@@ -236,7 +246,7 @@
               <EnumInfo>
                 <EnumValueCollection>
                   <SourceEnum>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</SourceEnum>
-                  <Value>On</Value>
+                  <Value>Off</Value>
                   <PossibleValues>
                     <ArrayOfEnumValue xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                       <EnumValue>
@@ -314,7 +324,7 @@
               <EnumInfo>
                 <EnumValueCollection>
                   <SourceEnum>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</SourceEnum>
-                  <Value>On</Value>
+                  <Value>Off</Value>
                   <PossibleValues>
                     <ArrayOfEnumValue xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                       <EnumValue>
@@ -340,7 +350,7 @@
               <EnumInfo>
                 <EnumValueCollection>
                   <SourceEnum>InputXML.Boolean_type, InputXML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</SourceEnum>
-                  <Value>On</Value>
+                  <Value>Off</Value>
                   <PossibleValues>
                     <ArrayOfEnumValue xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                       <EnumValue>
@@ -360,7 +370,7 @@
     </SerializedVertexData>
   </node>
   <node id="84fa4bc7-4826-438a-ac6a-3794e37bc89d">
-    <SerializedVertexData Version="1" X="282.671" Y="166">
+    <SerializedVertexData Version="1" X="355.339" Y="161.332">
       <Metadata type="TraceLab.Core.Components.ComponentMetadata, TraceLab.Core, Culture=neutral, PublicKeyToken=2c83cea59a8bb151" Label="LSA" ComponentMetadataDefinitionID="27127388-63a9-5e21-bec3-608a07b9cc2f" WaitsForAllPredecessors="True">
         <IOSpec Version="2">
           <Input>
@@ -434,13 +444,108 @@
       </Metadata>
     </SerializedVertexData>
   </node>
+  <node id="fe85d043-bb2b-4724-933c-f4d8cea6821e">
+    <SerializedVertexData Version="1" X="194.667" Y="166.665">
+      <Metadata type="TraceLab.Core.Components.ComponentMetadata, TraceLab.Core, Culture=neutral, PublicKeyToken=2c83cea59a8bb151" Label="TFIDF" ComponentMetadataDefinitionID="c1721a48-88dc-5524-a91a-a3a1532ffdfa" WaitsForAllPredecessors="True">
+        <IOSpec Version="2">
+          <Input>
+            <IOItem>
+              <IOItemDefinition Name="inputFile" Type="System.String" IOType="Input" />
+              <MappedTo>inputFile</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="outputDirectory" Type="System.String" IOType="Input" />
+              <MappedTo>outputDirectory</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="AC" Type="System.Boolean" IOType="Input" />
+              <MappedTo>AC</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="SC" Type="System.Boolean" IOType="Input" />
+              <MappedTo>SC</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="SM" Type="System.Boolean" IOType="Input" />
+              <MappedTo>SM</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="SR" Type="System.Boolean" IOType="Input" />
+              <MappedTo>SR</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="DW" Type="System.Boolean" IOType="Input" />
+              <MappedTo>DW</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="BG" Type="System.Boolean" IOType="Input" />
+              <MappedTo>BG</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="SY" Type="System.Boolean" IOType="Input" />
+              <MappedTo>SY</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="LO" Type="System.Boolean" IOType="Input" />
+              <MappedTo>LO</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="MU" Type="System.Boolean" IOType="Input" />
+              <MappedTo>MU</MappedTo>
+            </IOItem>
+            <IOItem>
+              <IOItemDefinition Name="DO" Type="System.Boolean" IOType="Input" />
+              <MappedTo>DO</MappedTo>
+            </IOItem>
+          </Input>
+          <Output />
+        </IOSpec>
+        <ConfigWrapper Version="1" IsJava="False">
+          <ConfigValues>
+            <PropertyObject>
+              <Version>3</Version>
+              <Name>Method</Name>
+              <DisplayName>Method</DisplayName>
+              <Description>Set Method to 'TFIDF' or 'Title vs. Description'</Description>
+              <ActualValueType>TraceLab.Core.Components.EnumValueCollection, TraceLab.Core, Culture=neutral, PublicKeyToken=2c83cea59a8bb151</ActualValueType>
+              <ValueType>TFIDF.Method_type, TFIDF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ValueType>
+              <Visible>True</Visible>
+              <IsEnum>True</IsEnum>
+              <EnumInfo>
+                <EnumValueCollection>
+                  <SourceEnum>TFIDF.Method_type, TFIDF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</SourceEnum>
+                  <Value>TFIDF</Value>
+                  <PossibleValues>
+                    <ArrayOfEnumValue xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                      <EnumValue>
+                        <Value>TFIDF</Value>
+                      </EnumValue>
+                      <EnumValue>
+                        <Value>TitleVsDescription</Value>
+                      </EnumValue>
+                    </ArrayOfEnumValue>
+                  </PossibleValues>
+                </EnumValueCollection>
+              </EnumInfo>
+            </PropertyObject>
+          </ConfigValues>
+        </ConfigWrapper>
+      </Metadata>
+    </SerializedVertexData>
+  </node>
   <edge id="42d49190-d069-4844-b665-9024f3c26489" source="Start" target="4e8c8e35-5dd4-4a63-90ff-6c1138450a86" isFixed="False" isVisible="True">
     <RoutePointsCollection />
   </edge>
   <edge id="f548490b-2dbc-45d6-8fe4-080e04faa7dd" source="4e8c8e35-5dd4-4a63-90ff-6c1138450a86" target="84fa4bc7-4826-438a-ac6a-3794e37bc89d" isFixed="False" isVisible="True">
     <RoutePointsCollection />
   </edge>
+  <edge id="2586abe4-d34b-4f84-826a-0cf1d762d817" source="4e8c8e35-5dd4-4a63-90ff-6c1138450a86" target="fe85d043-bb2b-4724-933c-f4d8cea6821e" isFixed="False" isVisible="True">
+    <RoutePointsCollection />
+  </edge>
   <edge id="8665ca6c-6336-478e-b9ee-417336573e92" source="84fa4bc7-4826-438a-ac6a-3794e37bc89d" target="End" isFixed="False" isVisible="True">
+    <RoutePointsCollection />
+  </edge>
+  <edge id="194174fc-40ce-40f4-9560-cd7829543c49" source="fe85d043-bb2b-4724-933c-f4d8cea6821e" target="End" isFixed="False" isVisible="True">
     <RoutePointsCollection />
   </edge>
 </graph>

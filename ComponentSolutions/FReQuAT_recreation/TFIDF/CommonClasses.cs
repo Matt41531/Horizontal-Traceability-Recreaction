@@ -37,7 +37,6 @@ namespace TFIDF
         // global values for booleans used in tokenization
         bool AC; bool SC; bool SM; bool SR; bool DW; bool BG; bool SY; bool LO; bool MU; bool DO;
         // globals I don't fully understand yet
-        int type = 1; // this changes sometimes??? Used in processXML
         DataSet dsFeatures = new DataSet(); // *** I THINK *** this is what needs to be passed into other components
         public static FeatureCollection fc; // access to the Feature collection class??
 
@@ -65,18 +64,18 @@ namespace TFIDF
         }
 
         // Function to input and read feature request file
-        public FeatureCollection InputXML(string fileName)
+        public FeatureCollection InputXML(string fileName, int fc_type)
         {
             dsFeatures = new DataSet();
             //dsFeatures.Clear();
             dsFeatures.ReadXml(fileName);
             //dgFeatures.DataSource = bsFeatures;
             //dgComments.DataSource = bsComments;
-            fc = processXML();
+            fc = processXML(fc_type);
             return fc;
         }
 
-        private FeatureCollection processXML()
+        private FeatureCollection processXML(int type)
         {
             //read XML file into Feature Collection with or without 'All comments' and 'Source code'
             if (type == 0)
@@ -3201,5 +3200,6 @@ namespace TFIDF
             return count;
         }
     }
+
 
 }

@@ -14,6 +14,12 @@ namespace InputXML
         Off
     }
 
+    public enum FC_type
+    {
+        Bugzilla, 
+        Tigris
+    }
+
     // All of the things in the configuration file
     public class InputXML_configuration
     {
@@ -64,5 +70,10 @@ namespace InputXML
         [DisplayName("DO: Remove words with only 1 document")]
         [Description("Set DO: Remove words with only 1 document format as 'True', or 'False'")]
         public Boolean_type DO { get; set; }
+
+        [DisplayName("Feature Collection")]
+        [Description("Repository type used for feature requests. Argo is Tigris, Mylyn/Netbeans are Bugzilla")]
+        public FC_type fc_type { get; set; }
+
     }
 }

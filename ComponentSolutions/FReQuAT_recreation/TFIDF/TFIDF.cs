@@ -27,6 +27,7 @@ namespace TFIDF
     [IOSpec(IOType = IOSpecType.Input, Name = "LO", DataType = typeof(bool))]
     [IOSpec(IOType = IOSpecType.Input, Name = "MU", DataType = typeof(bool))]
     [IOSpec(IOType = IOSpecType.Input, Name = "DO", DataType = typeof(bool))]
+    [IOSpec(IOType = IOSpecType.Input, Name = "fc_type", DataType = typeof(int))]
 
     public class TFIDF : BaseComponent
     {
@@ -68,12 +69,13 @@ namespace TFIDF
             LO = (bool)Workspace.Load("LO");
             MU = (bool)Workspace.Load("MU");
             DO = (bool)Workspace.Load("DO");
+            int fc_type = (int)Workspace.Load("fc_type");
 
             // Tokenize the XML File
             // *** Note: Ideallythis would happen in a seperate Tokenizing Component
             // *** Hurdle: FeatureCollection is not serilalizable to be stored in Workspace
             sF = new setFiles(inputFile, outputDirectory, AC, SC, DW);
-            fc = sF.InputXML(inputFile);
+            fc = sF.InputXML(inputFile, fc_type);
 
             // get Method from configuration file
             selectedMethod = (this.Configuration.Method);

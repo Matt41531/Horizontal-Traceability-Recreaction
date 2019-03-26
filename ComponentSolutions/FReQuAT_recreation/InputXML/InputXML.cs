@@ -13,15 +13,11 @@ namespace InputXML
                 ConfigurationType = typeof(InputXML_configuration)
         )]
 
-    // Add needed outputs to the workspace
-    [IOSpec(IOType = IOSpecType.Output,
-        Name = "outputDirectory",
-        DataType = typeof(String))]
-    [IOSpec(IOType = IOSpecType.Output,
-        Name = "inputFile",
-        DataType = typeof(String))]
+    // Workspace items to store directory paths for needed files
+    [IOSpec(IOType = IOSpecType.Output, Name = "outputDirectory", DataType = typeof(String))]
+    [IOSpec(IOType = IOSpecType.Output, Name = "inputFile", DataType = typeof(String))]
 
-    // Add boolean values to the workspace used in Tokenization
+    // Workplace items to store boolean values to the workspace used in Tokenization
     [IOSpec(IOType = IOSpecType.Output, Name = "AC", DataType = typeof(bool))]
     [IOSpec(IOType = IOSpecType.Output, Name = "SC", DataType = typeof(bool))]
     [IOSpec(IOType = IOSpecType.Output, Name = "SM", DataType = typeof(bool))]
@@ -32,6 +28,9 @@ namespace InputXML
     [IOSpec(IOType = IOSpecType.Output, Name = "LO", DataType = typeof(bool))]
     [IOSpec(IOType = IOSpecType.Output, Name = "MU", DataType = typeof(bool))]
     [IOSpec(IOType = IOSpecType.Output, Name = "DO", DataType = typeof(bool))]
+
+    // Workpace item to store the type fo Feature Collection to process the file as
+    [IOSpec(IOType = IOSpecType.Output, Name = "fc_type", DataType = typeof(int))]
 
     public class InputXML : BaseComponent
     {
@@ -97,6 +96,9 @@ namespace InputXML
             Workspace.Store("MU", MU);
             bool DO = get_bool(this.Configuration.DO); // get boolean value for "DO: Remove words with only 1 document"
             Workspace.Store("DO", DO);
+
+            int fc_type = get_fctype(this.Configuration.fc_type); // get int value to represent the feature collection type
+            Workspace.Store("fc_type", fc_type);
         }
 
         // Function to take dropbox values, and return the resulting boolean
@@ -112,6 +114,20 @@ namespace InputXML
                 truth_val = false;
             }
             return truth_val;
+        }
+
+        // Function to return an integer to represent FeatureCollection type
+        public int get_fctype(FC_type type)
+        {
+            int return_int;
+            if (type == FC_type.Bugzilla)
+            {
+                return_int = 0; // 0 = Bugzilla (Mylyn/Netbeans)
+            } else
+            {
+                return_int = 1; // 1 = Tigris (ArgoUML)
+            }
+            return return_int;
         }
     }
 }

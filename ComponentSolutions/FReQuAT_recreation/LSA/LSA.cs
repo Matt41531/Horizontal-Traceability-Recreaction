@@ -39,6 +39,7 @@ namespace LSA
     [IOSpec(IOType = IOSpecType.Input, Name = "LO", DataType = typeof(bool))]
     [IOSpec(IOType = IOSpecType.Input, Name = "MU", DataType = typeof(bool))]
     [IOSpec(IOType = IOSpecType.Input, Name = "DO", DataType = typeof(bool))]
+    [IOSpec(IOType = IOSpecType.Input, Name = "fc_type", DataType = typeof(int))]
 
     public class LSA : BaseComponent
     {
@@ -85,6 +86,7 @@ namespace LSA
         string inputFile;
         string outputDirectory;
         bool AC; bool SC; bool SM; bool SR; bool DW; bool BG; bool SY; bool LO; bool MU; bool DO;
+        int fc_type;
 
         // access to classes
         FeatureCollection fc;
@@ -116,12 +118,13 @@ namespace LSA
             LO = (bool)Workspace.Load("LO");
             MU = (bool)Workspace.Load("MU");
             DO = (bool)Workspace.Load("DO");
+            fc_type = (int)Workspace.Load("fc_type");
 
             // Tokenize the XML File
             // *** Note: Ideallythis would happen in a seperate Tokenizing Component
             // *** Hurdle: FeatureCollection is not serilalizable to be stored in Workspace
             sF = new setFiles(inputFile, outputDirectory, AC, SC, DW);
-            fc = sF.InputXML(inputFile);
+            fc = sF.InputXML(inputFile, fc_type);
 
             // get k value from configuration file
             string k = (string)this.Configuration.k;

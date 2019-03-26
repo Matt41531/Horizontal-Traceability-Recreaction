@@ -1,0 +1,6 @@
+3/26/2019 5:01:21 PM: 5:01 PM Start LSA.
+3/26/2019 5:01:21 PM:  Feature requests processed: 0.
+3/26/2019 5:01:21 PM: 5:01 PM TFIDF matrix calculated.
+3/26/2019 5:01:21 PM: .
+3/26/2019 5:01:21 PM: Index was outside the bounds of the array..
+3/26/2019 5:01:21 PM: Error reading matrix.

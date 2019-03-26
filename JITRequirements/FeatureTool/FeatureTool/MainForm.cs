@@ -84,7 +84,7 @@ namespace FeatureTool
             outputFile += ".csv";
             System.IO.File.Delete(outputFile);
             System.IO.StreamWriter sw = new System.IO.StreamWriter(outputFile, true);
-            sw.WriteLine("Title_i;ID_i;Doc_j;ID_j;Cosine Similarity");
+            sw.WriteLine("Title_i,ID_i,Doc_j,ID_j,Cosine Similarity");
             for (int i = 0; i < fc.featureList.Count; i++)
             {
                 Feature f1 = fc.featureList[i];
@@ -96,7 +96,7 @@ namespace FeatureTool
                         if (sim > simCut)
                         {
                             Feature f2 = fc.featureList[j];
-                            sw.WriteLine(i.ToString() + ";" + f1.id + ";" + j.ToString() + ";" + f2.id + ";" + sim.ToString());
+                            sw.WriteLine(i.ToString() + "," + f1.id + "," + j.ToString() + "," + f2.id + "," + sim.ToString());
                         }
                     }
                 }
@@ -134,7 +134,7 @@ namespace FeatureTool
             outputFile += ".csv";
             System.IO.File.Delete(outputFile);
             System.IO.StreamWriter sw2 = new System.IO.StreamWriter(outputFile);
-            sw2.WriteLine("feature_id; dup_id; rank; sim");
+            sw2.WriteLine("feature_id, dup_id, rank, sim");
 
             //voor 1 duplicate top 10/20 vinden
             int cTotal = 0;
@@ -191,8 +191,8 @@ namespace FeatureTool
                                 cTwenty++;
                             }
 
-                            sw2.WriteLine(f.id + ";" + f.duplicate_id + ";" + f.dupRank + ";" + f.dupSim.ToString("F4"));
-                            Debug.WriteLine(DateTime.Now.ToShortTimeString() + " " + f.id + ";" + f.duplicate_id + ";" + f.dupRank + ";" + f.dupSim.ToString("F4"));
+                            sw2.WriteLine(f.id + "," + f.duplicate_id + "," + f.dupRank + "," + f.dupSim.ToString("F4"));
+                            Debug.WriteLine(DateTime.Now.ToShortTimeString() + " " + f.id + "," + f.duplicate_id + "," + f.dupRank + "," + f.dupSim.ToString("F4"));
                         }
                     }
                 }
@@ -399,7 +399,7 @@ namespace FeatureTool
                 outputFile += "_xref.csv";
                 System.IO.File.Delete(outputFile);
                 System.IO.StreamWriter sw = new System.IO.StreamWriter(outputFile, true);
-                sw.WriteLine("Title_i;ID_i;Doc_j;ID_j;Cosine Similarity");
+                sw.WriteLine("Title_i,ID_i,Doc_j,ID_j,Cosine Similarity");
                 for (int i = 0; i < fc.featureList.Count; i++)
                 {
                     Feature f1 = fc.featureList[i];
@@ -414,7 +414,7 @@ namespace FeatureTool
                         if (j != i)
                         {
                             Feature f2 = fc.featureList[j];
-                            sw.WriteLine(i.ToString() + ";" + f1.id + ";" + j.ToString() + ";" + f2.id + ";" + tf.GetSimilarity(i, j).ToString());
+                            sw.WriteLine(i.ToString() + "," + f1.id + "," + j.ToString() + "," + f2.id + "," + tf.GetSimilarity(i, j).ToString());
                         }
                     }
                     lblTDF.Text = i.ToString() + "done!";
@@ -451,7 +451,7 @@ namespace FeatureTool
                 outputFile += ".csv";
                 System.IO.File.Delete(outputFile);
                 System.IO.StreamWriter sw = new System.IO.StreamWriter(outputFile);
-                sw.WriteLine("Doc_i;ID_i;Doc_j;ID_j;Cosine Similarity");
+                sw.WriteLine("Doc_i,ID_i,Doc_j,ID_j,Cosine Similarity");
                 int i = 0;
                 foreach (Feature f1 in fc.featureList)
                 {
@@ -466,7 +466,7 @@ namespace FeatureTool
                         if (sim > simCut) //for Netbeans to reduce file size; see parameter
                         {
                             Feature f2 = fc.featureList[j];
-                            sw.WriteLine(i.ToString() + ";" + f1.id + ";" + j.ToString() + ";" + f2.id + ";" + sim.ToString());
+                            sw.WriteLine(i.ToString() + "," + f1.id + "," + j.ToString() + "," + f2.id + "," + sim.ToString());
                         }
                     }
                     //}
@@ -533,11 +533,11 @@ namespace FeatureTool
             outputFile += ".csv";
             System.IO.File.Delete(outputFile);
             System.IO.StreamWriter sw = new System.IO.StreamWriter(outputFile);
-            sw.WriteLine("i;Term;Vector_" + v1.ToString() + ";Vector_" + v2.ToString());
+            sw.WriteLine("i,Term,Vector_" + v1.ToString() + ",Vector_" + v2.ToString());
 
             for (int i = 0; i < tf._terms.Count; i++)
             {
-                sw.WriteLine(i.ToString() + ";" + tf._terms[i] + ";" + tf.GetTermVector((int)v1)[i].ToString() + ";" + tf.GetTermVector((int)v2)[i].ToString());
+                sw.WriteLine(i.ToString() + "," + tf._terms[i] + "," + tf.GetTermVector((int)v1)[i].ToString() + "," + tf.GetTermVector((int)v2)[i].ToString());
             }
 
             sw.Close();
@@ -615,7 +615,7 @@ namespace FeatureTool
             Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + getFileEnding());  
             System.IO.File.Delete(outputFile);
             System.IO.StreamWriter sw = new System.IO.StreamWriter(outputFile);
-            sw.WriteLine("feature_id; dup_id; rank; sim");
+            sw.WriteLine("feature_id, dup_id, rank, sim");
 
             //voor 1 duplicate top 10/20 vinden
             int cTotal = 0;
@@ -672,7 +672,7 @@ namespace FeatureTool
                                 cTwenty++;
                             }
 
-                           sw.WriteLine(f.id + ";" + f.duplicate_id + ";" + f.dupRank + ";" + f.dupSim.ToString("F4"));
+                           sw.WriteLine(f.id + "," + f.duplicate_id + "," + f.dupRank + "," + f.dupSim.ToString("F4"));
                            // Debug.WriteLine("[" + cTotal.ToString() + "] " + f.id + ";" + f.duplicate_id + ";" + f.dupRank + ";" + f.dupSim.ToString("F4") + "; T10=" + cTen.ToString() + "; T20=" + cTwenty.ToString());
                         }
                     }

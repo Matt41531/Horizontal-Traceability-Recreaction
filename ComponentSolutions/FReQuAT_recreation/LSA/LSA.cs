@@ -1291,6 +1291,7 @@ namespace LSA
         {
             DateTime start = DateTime.Now;
             Utilities.LogMessageToFile(setFiles.logfile + "_LSA.txt", DateTime.Now.ToShortTimeString() + " Start LSA");
+            Utilities.LogMessageToFile(setFiles.logfile + "_LSA.txt", DateTime.Now.ToShortTimeString() + " Configurations: " + sF.getFileEnding(AC, SC, SM, SR, DW, BG, SY, LO, MU, DO));
 
             Utilities.LogMessageToFile(setFiles.logfile + "_LSA.txt", " Feature requests processed: " + fc.featureList.Count.ToString());
             StopWordsHandler swh = new StopWordsHandler(SY);

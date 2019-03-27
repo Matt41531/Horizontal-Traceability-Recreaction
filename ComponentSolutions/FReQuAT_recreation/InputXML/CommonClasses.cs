@@ -2913,7 +2913,8 @@ namespace InputXML
                 int nrMatches = 0;
                 string[] words = tokenizer.Partition(docs[i], bBi, bSyn, bCode, out nrMatches);
                 totalMatches += nrMatches;
-                //Utilities.LogMessageToFile(MainForm.logfile, i + ": " + nrMatches + " matches removed");
+                Utilities.LogMessageToFile(setFiles.logfile + "_TFIDF.txt", i + ": " + nrMatches + " matches removed");
+                Utilities.LogMessageToFile(setFiles.logfile + "_LSA.txt", i + ": " + nrMatches + " matches removed");
                 //_parsedDocs.Add(words);
                 //words = tokenizer.Partition(docs[i], bBi, bSyn, bCode);
 
@@ -2939,7 +2940,8 @@ namespace InputXML
                     }
                 }
             }
-            //Utilities.LogMessageToFile(MainForm.logfile, "TOTAL: " + totalMatches + " matches removed");
+            Utilities.LogMessageToFile(setFiles.logfile + "_TFIDF.txt", "TOTAL: " + totalMatches + " matches removed");
+            Utilities.LogMessageToFile(setFiles.logfile + "_LSA.txt", "TOTAL: " + totalMatches + " matches removed");
 
             if (bMulti)
             {

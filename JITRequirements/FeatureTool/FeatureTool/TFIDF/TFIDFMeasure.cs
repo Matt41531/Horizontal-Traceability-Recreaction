@@ -153,7 +153,7 @@ namespace FeatureTool
                     }
                 }
 			}
-            //Utilities.LogMessageToFile(MainForm.logfile, "TOTAL: " + totalMatches + " matches removed");
+            Utilities.LogMessageToFile(MainForm.logfile, "TOTAL: " + totalMatches + " matches removed");
 
             if (bMulti)
             {

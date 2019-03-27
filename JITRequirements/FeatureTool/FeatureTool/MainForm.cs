@@ -60,6 +60,7 @@ namespace FeatureTool
         {
             DateTime start = DateTime.Now;
             Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " Start LSA");
+            Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " Configuration: " + getFileEnding());
             InputXML(fileXML);
             Utilities.LogMessageToFile(MainForm.logfile, " Feature requests processed: " + fc.featureList.Count.ToString());
             ////StopWordsHandler swh = new StopWordsHandler(cbSY.Checked);
@@ -349,6 +350,7 @@ namespace FeatureTool
         private void btnTDF_Click(object sender, EventArgs e)
         {
             Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " Start TF-IDF");
+            Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " Configuration: " + getFileEnding());
             //processXML();
             InputXML(fileXML);
             StopWordsHandler stopword = new StopWordsHandler(cbSY.Checked);
@@ -358,6 +360,7 @@ namespace FeatureTool
                 Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " End TF-IDF");
                 lblTDF.Text = "cosim(0,1) = " + tf.GetSimilarity(17, 259).ToString();
                 lblTDF.Text += "; cosim(0,2) = " + tf.GetSimilarity(0, 2).ToString();
+                Utilities.LogMessageToFile(MainForm.logfile, DateTime.Now.ToShortTimeString() + " " + lblTDF.Text);
 
                 ////word count
                 //int wordCount = 0;
@@ -367,7 +370,7 @@ namespace FeatureTool
                 //    {
                 //        wordCount += tf._termFreq[i][j];
                 //    }
-                    
+
                 //}
                 //Utilities.LogMessageToFile(logfile, "TOTAL WORD COUNT: " + wordCount);
 
@@ -504,7 +507,7 @@ namespace FeatureTool
             bsComments.DataSource = ds.Tables["long_desc"];
         }
 
-        private string getFileEnding()
+        public string getFileEnding()
         {
             string strEnd = "";
             if (cbMethod.SelectedIndex != 0)

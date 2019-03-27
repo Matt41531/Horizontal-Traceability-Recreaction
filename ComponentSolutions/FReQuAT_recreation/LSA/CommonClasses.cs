@@ -2913,7 +2913,7 @@ namespace LSA
                 int nrMatches = 0;
                 string[] words = tokenizer.Partition(docs[i], bBi, bSyn, bCode, out nrMatches);
                 totalMatches += nrMatches;
-                //Utilities.LogMessageToFile(MainForm.logfile, i + ": " + nrMatches + " matches removed");
+                //Utilities.LogMessageToFile(setFiles.logfile + "_" + typeof(TFIDFMeasure).Namespace + ".txt", i + ": " + nrMatches + " matches removed");
                 //_parsedDocs.Add(words);
                 //words = tokenizer.Partition(docs[i], bBi, bSyn, bCode);
 
@@ -2939,7 +2939,7 @@ namespace LSA
                     }
                 }
             }
-            //Utilities.LogMessageToFile(MainForm.logfile, "TOTAL: " + totalMatches + " matches removed");
+            Utilities.LogMessageToFile(setFiles.logfile + "_" + typeof(TFIDFMeasure).Namespace + ".txt", "TOTAL: " + totalMatches + " matches removed");
 
             if (bMulti)
             {

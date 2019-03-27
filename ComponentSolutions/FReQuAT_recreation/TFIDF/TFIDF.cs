@@ -67,7 +67,7 @@ namespace TFIDF
             BG = (bool)Workspace.Load("BG");
             SY = (bool)Workspace.Load("SY");
             LO = (bool)Workspace.Load("LO");
-            MU = (bool)Workspace.Load("MU");
+            MU = (bool)Workspace.Load("MU"); 
             DO = (bool)Workspace.Load("DO");
             int fc_type = (int)Workspace.Load("fc_type");
 
@@ -98,12 +98,16 @@ namespace TFIDF
             // Log beginning of process
             Utilities.LogMessageToFile(setFiles.logfile + "_TFIDF.txt", DateTime.Now.ToShortTimeString() + " Start TF-IDF");
 
+            Utilities.LogMessageToFile(setFiles.logfile + "_TFIDF.txt", DateTime.Now.ToShortTimeString()
+                + " Configuration: " + sF.getFileEnding(AC, SC, SM, SR, DW, BG, SY, LO, MU, DO));
+
             StopWordsHandler stopword = new StopWordsHandler(SY);
 
             tf = new TFIDFMeasure(fc, SM, SR, DW, BG, SY, LO, SC, MU, DO);
             Utilities.LogMessageToFile(setFiles.logfile + "_TFIDF.txt", DateTime.Now.ToShortTimeString() + " End TF-IDF");
             TFIDF_Text = "cosim(0,1) = " + tf.GetSimilarity(17, 259).ToString();
             TFIDF_Text += "; cosim(0,2) = " + tf.GetSimilarity(0, 2).ToString();
+            Utilities.LogMessageToFile(setFiles.logfile + "_TFIDF.txt", DateTime.Now.ToShortTimeString() + " " + TFIDF_Text);
 
         }
 
@@ -114,6 +118,9 @@ namespace TFIDF
             StopWordsHandler stopword = new StopWordsHandler(SY);
 
             string outputFile = outputDirectory + "\\cossim" + sF.getFileEnding(AC, SC, SM, SR, DW, BG, SY, LO, MU, DO);
+            Utilities.LogMessageToFile(setFiles.logfile + "_TFIDF.txt", DateTime.Now.ToShortTimeString() 
+                + " T vs. D Output File: " + "cossim" + sF.getFileEnding(AC, SC, SM, SR, DW, BG, SY, LO, MU, DO) + "_xref.csv");
+
             outputFile += "_xref.csv";
             System.IO.File.Delete(outputFile);
             System.IO.StreamWriter sw = new System.IO.StreamWriter(outputFile, true);

@@ -1,0 +1,25 @@
+3/29/2019 1:13:25 PM: 1:13 PM Start TF-IDF.
+3/29/2019 1:13:25 PM: 1:13 PM Configuration: _SR.
+3/29/2019 1:13:27 PM: TOTAL: 58 matches removed.
+3/29/2019 1:13:28 PM: 1:13 PM End TF-IDF.
+3/29/2019 1:13:28 PM: 1:13 PM cosim(0,1) = 0.02226487; cosim(0,2) = 0.
+3/29/2019 1:13:40 PM: 1:13 PM Start LSA.
+3/29/2019 1:13:40 PM: 1:13 PM Configuration: _SR.
+3/29/2019 1:13:40 PM:  Feature requests processed: 425.
+3/29/2019 1:13:42 PM: TOTAL: 136 matches removed.
+3/29/2019 1:13:43 PM: 1:13 PM TFIDF matrix calculated.
+3/29/2019 1:13:43 PM: .
+3/29/2019 1:13:43 PM: NUMBER OF ROWS 2050.
+3/29/2019 1:13:43 PM: NUMBER OF COLS 425.
+3/29/2019 1:13:43 PM: Computing the SVD...
+.
+3/29/2019 1:13:43 PM: TRANSPOSING THE MATRIX FOR SPEED
+.
+3/29/2019 1:13:43 PM: Machine precision 2 53 2 -52 -53.
+3/29/2019 1:13:44 PM: NUMBER OF LANCZOS STEPS 424.
+3/29/2019 1:13:44 PM: RITZ VALUES STABILIZED = RANK 424.
+3/29/2019 1:13:47 PM: Time for encoding: 3.71 seconds.
+3/29/2019 1:14:02 PM: 1:14 PM LSA matrix calculated for k = 1700.
+3/29/2019 1:14:17 PM: 1:14 PM top 10: 0.40% out of 10 
+ top 20:0.70% out of 10.
+3/29/2019 1:14:17 PM: 1:14 PM Total processing time 37.11 seconds.

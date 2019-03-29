@@ -1,0 +1,5 @@
+3/29/2019 12:14:41 PM: 12:14 PM Start TF-IDF.
+3/29/2019 12:14:41 PM: 12:14 PM Configuration: .
+3/29/2019 12:14:43 PM: TOTAL: 58 matches removed.
+3/29/2019 12:14:45 PM: 12:14 PM End TF-IDF.
+3/29/2019 12:14:45 PM: 12:14 PM cosim(0,1) = 0.1076133; cosim(0,2) = 0.008380666.

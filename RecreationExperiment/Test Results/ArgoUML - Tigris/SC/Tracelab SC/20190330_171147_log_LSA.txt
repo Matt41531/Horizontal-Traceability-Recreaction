@@ -1,0 +1,18 @@
+3/30/2019 5:11:49 PM: 5:11 PM Start LSA.
+3/30/2019 5:11:49 PM:  Feature requests processed: 1273.
+3/30/2019 5:11:53 PM: 5:11 PM TFIDF matrix calculated.
+3/30/2019 5:11:53 PM: .
+3/30/2019 5:11:54 PM: NUMBER OF ROWS 8348.
+3/30/2019 5:11:54 PM: NUMBER OF COLS 1273.
+3/30/2019 5:11:54 PM: Computing the SVD...
+.
+3/30/2019 5:11:54 PM: TRANSPOSING THE MATRIX FOR SPEED
+.
+3/30/2019 5:11:54 PM: Machine precision 2 53 2 -52 -53.
+3/30/2019 5:11:58 PM: NUMBER OF LANCZOS STEPS 1264.
+3/30/2019 5:11:58 PM: RITZ VALUES STABILIZED = RANK 1264.
+3/30/2019 5:12:33 PM: Time for encoding: 39.53 seconds.
+3/30/2019 5:16:54 PM: 5:16 PM LSA matrix calculated for k = 1700.
+3/30/2019 5:18:49 PM: 5:18 PM top 10: 0.55% out of 101 
+ top 20:0.73% out of 101.
+3/30/2019 5:18:49 PM: 5:18 PM Total processing time 420.51 seconds.

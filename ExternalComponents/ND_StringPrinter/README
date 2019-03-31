@@ -1,0 +1,33 @@
+AUTHORS
+
+Breno Dantas Cruz <bdantasc@nd.edu>, 03/20/2016
+
+PURPOSE
+
+This component receives a string representation of a srcml file from the workspace and prints it to the TraceLab log space.
+
+This component requires the subject program to have already been parsed from srcML to a String.  
+
+WORKSPACE INPUTS
+
+xmlfile: String - String that contains the contents of a srcml file.
+
+WORKSPACE OUTPUTS
+
+None.
+
+ENVIRONMENT OUTPUTS
+
+None.
+
+BUILD NOTES
+
+Be sure to set JAVA_HOME.  E.g.:
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
+Run 'ant'.
+
+Modify install directories in build.xml.
+
+
+

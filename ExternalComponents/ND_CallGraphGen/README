@@ -1,0 +1,42 @@
+AUTHORS
+
+Collin McMillan <cmc@nd.edu>, 2/25/2016
+
+PURPOSE
+
+This component reads a srcML file and creates a HashMap<String, List<String>> representing the call graph.  The key in the map is the fully qualified name of the method.  The value is a list of strings, where each item in the list is a fully qualified name of a method that the key method calls.
+
+This component requires the subject program to have already been parsed into srcML.  SrcML is available for several platforms here:
+http://www.srcml.org/
+
+For example:
+  $ srcml prog.java
+Or for several files:
+  $ srcml prog_src_directory
+
+CONFIGURATION PARAMETERS
+
+SrcmlFilename : The name of a single srcML XML file that the component will parse.
+
+WORKSPACE INPUTS
+
+None.
+
+WORKSPACE OUTPUTS
+
+callgraph : A variable of type HashMap<String, List<String>> that contains the call graph.
+
+ENVIRONMENT OUTPUTS
+
+None.
+
+BUILD NOTES
+
+Be sure to set JAVA_HOME.  E.g.:
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
+Always remember to "ant clean" before running "ant."
+
+Modify install directories in build.xml.
+
+

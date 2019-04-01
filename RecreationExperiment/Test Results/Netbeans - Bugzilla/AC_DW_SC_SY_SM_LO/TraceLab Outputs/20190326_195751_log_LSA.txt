@@ -15,3 +15,6 @@
 3/26/2019 8:05:24 PM: RITZ VALUES STABILIZED = RANK 4199.
 3/26/2019 8:45:40 PM: Time for encoding: 2719.92 seconds.
 3/29/2019 11:58:38 AM: 11:58 AM LSA matrix calculated for k = 1700.
+3/30/2019 7:01:17 PM: 7:01 PM top 10: 0.69% out of 342 
+ top 20:0.77% out of 342.
+3/30/2019 7:01:17 PM: 7:01 PM Total processing time 342198.12 seconds.
